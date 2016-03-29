@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="LayoutRowViewNormal">
+        <attr name="rv_titleSize" format="dimension|reference" />
+        <attr name="rv_titleColor" format="color|reference" />
+        <attr name="rv_title" format="string|reference" />
+        <attr name="rv_titleDrawable" format="reference" />
+        <attr name="rv_titleDrawablePadding" format="dimension|reference" />
+        <attr name="rv_pointDrawable" format="reference" />
+        <attr name="rv_hintSize" format="dimension|reference" />
+        <attr name="rv_hintColor" format="color|reference" />
+        <attr name="rv_hintTips" format="string|reference" />
+        <attr name="rv_rightDrawable" format="reference" />
+        <attr name="rv_showHint" format="boolean" />
+        <attr name="rv_showRight" format="boolean" />
+        <attr name="rv_showPoint" format="boolean" />
+    </declare-styleable>
+
+</resources>
