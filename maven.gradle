@@ -1,0 +1,42 @@
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = PROJ_GROUP // Maven Group ID for the artifact，一般填你唯一的包名
+version = PROJ_VERSION
+project.archivesBaseName = PROJ_ARTIFACT
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom.project {
+            // Add your description here
+            name PROJ_ARTIFACT
+            description PROJ_DESC
+            url PROJ_URL_LINK
+            inceptionYear '2016'
+
+            packaging 'aar'
+            groupId PROJ_GROUP
+            artifactId PROJ_ARTIFACT
+            version PROJ_VERSION
+
+            // Set your license
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                }
+            }
+            developers {
+                developer {
+                    id DEVELOPER_ID    //填写的一些基本信息
+                    name DEVELOPER_NAME
+                    email DEVELOPER_EMAIL
+                }
+            }
+            scm {
+                connection PROJ_URL_GIT
+                developerConnection PROJ_URL_GIT
+                url PROJ_URL_LINK
+            }
+        }
+    }
+}

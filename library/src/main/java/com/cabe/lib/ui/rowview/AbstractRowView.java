@@ -11,8 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import row.ui.lib.cabe.com.library.R;
-
 /**
  * 操作栏抽象类
  * Created by cabe on 16/3/28.

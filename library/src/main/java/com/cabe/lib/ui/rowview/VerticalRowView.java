@@ -7,8 +7,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import row.ui.lib.cabe.com.library.R;
-
 /**
  * 垂直布局的操作栏
  * Created by cabe on 16/3/28.
