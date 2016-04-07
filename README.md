@@ -9,6 +9,8 @@ dependencies {
 
 ### Usage
 
+<img src="./resource/screen_shot.png"  width="400" height="127"/>
+
 #### HorizontalRowView
 
 
@@ -27,7 +29,6 @@ dependencies {
         android:onClick="onClick" />
          
 ```
-
 
 #### VerticalRowView
 
