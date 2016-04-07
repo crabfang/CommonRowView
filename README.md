@@ -9,7 +9,7 @@ dependencies {
 
 ### Usage
 
-#### ExpandableLayout
+#### HorizontalRowView
 
 
 ``` xml
@@ -28,6 +28,8 @@ dependencies {
          
 ```
 
+
+#### VerticalRowView
 
 ``` xml
 
