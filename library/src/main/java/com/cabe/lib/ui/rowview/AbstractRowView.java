@@ -25,6 +25,7 @@ public abstract class AbstractRowView extends RelativeLayout {
     protected ImageView rightImg;
 
     protected int DEFAULT_ICON_PADDING = 0;
+    protected int DEFAULT_INNER_MARGIN = 0;
     protected int DEFAULT_TITLE_SIZE = 0;
     protected int DEFAULT_TITLE_COLOR = 0xFF666666;
     protected int DEFAULT_HINT_SIZE = 0;
@@ -33,6 +34,7 @@ public abstract class AbstractRowView extends RelativeLayout {
     private void initDefaultConfig(Context context) {
         float density = context.getResources().getDisplayMetrics().density;
         DEFAULT_ICON_PADDING = (int) (density * 5);
+        DEFAULT_INNER_MARGIN = (int) (density * 4);
         DEFAULT_TITLE_SIZE = (int) (density * 16);
         DEFAULT_HINT_SIZE = (int) (density * 12);
     }
@@ -46,6 +48,7 @@ public abstract class AbstractRowView extends RelativeLayout {
     }
 
     protected abstract void initView(Context context);
+    protected abstract void setInnerMargin(int margin);
 
     private void initAttr(Context context, AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LayoutRowViewNormal);
@@ -73,6 +76,9 @@ public abstract class AbstractRowView extends RelativeLayout {
         } else {
             setHint("");
         }
+
+        int margin = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_innerMargin, DEFAULT_INNER_MARGIN);
+        setInnerMargin(margin);
 
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_pointDrawable)) {
             point.setImageDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_pointDrawable));

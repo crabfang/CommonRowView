@@ -28,4 +28,11 @@ public class VerticalRowView extends AbstractRowView {
         hintTips = (TextView) findViewById(R.id.layout_custom_row_op_hint_tips);
         rightImg = (ImageView) findViewById(R.id.layout_custom_row_op_arrow);
     }
+
+    @Override
+    protected void setInnerMargin(int margin) {
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHint.getLayoutParams();
+        params.topMargin = margin;
+        viewHint.setLayoutParams(params);
+    }
 }

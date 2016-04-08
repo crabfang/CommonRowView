@@ -11,6 +11,7 @@
         <attr name="rv_hintSize" format="dimension|reference" />
         <attr name="rv_hintColor" format="color|reference" />
         <attr name="rv_hintTips" format="string|reference" />
+        <attr name="rv_innerMargin" format="dimension|reference" />
         <attr name="rv_rightDrawable" format="reference" />
         <attr name="rv_showHint" format="boolean" />
         <attr name="rv_showRight" format="boolean" />

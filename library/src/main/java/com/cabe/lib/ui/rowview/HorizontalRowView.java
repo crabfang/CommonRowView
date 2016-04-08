@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -27,5 +28,12 @@ public class HorizontalRowView extends AbstractRowView {
         point = (ImageView) findViewById(R.id.layout_custom_row_op_head_point);
         hintTips = (TextView) findViewById(R.id.layout_custom_row_op_hint_tips);
         rightImg = (ImageView) findViewById(R.id.layout_custom_row_op_arrow);
+    }
+
+    @Override
+    protected void setInnerMargin(int margin) {
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) viewHint.getLayoutParams();
+        params.leftMargin = margin;
+        viewHint.setLayoutParams(params);
     }
 }
