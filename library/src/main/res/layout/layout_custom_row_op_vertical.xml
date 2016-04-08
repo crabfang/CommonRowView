@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/row_view_right_arrow"
+        android:src="@drawable/icon_arrow_right"
         android:contentDescription="@string/app_name" />
 
 </RelativeLayout>
