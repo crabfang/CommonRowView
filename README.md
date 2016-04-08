@@ -43,6 +43,7 @@ dependencies {
         app:rv_titleDrawable="@drawable/icon_row"
         app:rv_showHint="true"
         app:rv_hintTips="hint"
+        app:rv_innerMargin="2dp"
         android:tag="tag"
         android:onClick="onClick" />
          

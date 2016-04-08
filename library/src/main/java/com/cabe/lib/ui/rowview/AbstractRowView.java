@@ -34,7 +34,7 @@ public abstract class AbstractRowView extends RelativeLayout {
     private void initDefaultConfig(Context context) {
         float density = context.getResources().getDisplayMetrics().density;
         DEFAULT_ICON_PADDING = (int) (density * 5);
-        DEFAULT_INNER_MARGIN = (int) (density * 4);
+        DEFAULT_INNER_MARGIN = (int) (density * 2);
         DEFAULT_TITLE_SIZE = (int) (density * 16);
         DEFAULT_HINT_SIZE = (int) (density * 12);
     }
