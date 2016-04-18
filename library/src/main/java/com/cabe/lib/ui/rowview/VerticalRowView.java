@@ -17,22 +17,24 @@ public class VerticalRowView extends AbstractRowView {
     }
 
     @Override
-    protected void initView(Context context) {
+        protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_vertical, this);
         viewHead = findViewById(R.id.layout_custom_row_op_head);
         viewHint = (LinearLayout) findViewById(R.id.layout_custom_row_op_hint);
 
-        iconVal = (ImageView) findViewById(R.id.layout_custom_row_op_icon);
-        titleVal = (TextView) findViewById(R.id.layout_custom_row_op_head_title);
-        point = (ImageView) findViewById(R.id.layout_custom_row_op_head_point);
-        hintTips = (TextView) findViewById(R.id.layout_custom_row_op_hint_tips);
-        rightImg = (ImageView) findViewById(R.id.layout_custom_row_op_arrow);
+        rvIcon = (ImageView) findViewById(R.id.layout_custom_row_op_icon);
+        rvTitle = (TextView) findViewById(R.id.layout_custom_row_op_head_title);
+        rvFlag = (ImageView) findViewById(R.id.layout_custom_row_op_head_point);
+        rvHint = (TextView) findViewById(R.id.layout_custom_row_op_hint_tips);
+        rvOption = (ImageView) findViewById(R.id.layout_custom_row_op_arrow);
     }
 
     @Override
     protected void setInnerMargin(int margin) {
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHint.getLayoutParams();
-        params.topMargin = margin;
-        viewHint.setLayoutParams(params);
+        if(viewHint != null) {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHint.getLayoutParams();
+            params.topMargin = margin;
+            viewHint.setLayoutParams(params);
+        }
     }
 }

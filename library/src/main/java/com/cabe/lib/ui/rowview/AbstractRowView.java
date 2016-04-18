@@ -18,11 +18,11 @@ import android.widget.TextView;
 public abstract class AbstractRowView extends RelativeLayout {
     protected View viewHead;
     protected LinearLayout viewHint;
-    protected ImageView iconVal;
-    protected TextView titleVal;
-    protected ImageView point;
-    protected TextView hintTips;
-    protected ImageView rightImg;
+    protected ImageView rvIcon;
+    protected TextView rvTitle;
+    protected ImageView rvFlag;
+    protected TextView rvHint;
+    protected ImageView rvOption;
 
     protected int DEFAULT_ICON_PADDING = 0;
     protected int DEFAULT_INNER_MARGIN = 0;
@@ -52,42 +52,50 @@ public abstract class AbstractRowView extends RelativeLayout {
 
     private void initAttr(Context context, AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LayoutRowViewNormal);
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleDrawable)) {
-            Drawable icon = a.getDrawable(R.styleable.LayoutRowViewNormal_rv_titleDrawable);
+        if(rvIcon != null) {
+            if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleDrawable)) {
+                Drawable icon = a.getDrawable(R.styleable.LayoutRowViewNormal_rv_titleDrawable);
+                rvIcon.setImageDrawable(icon);
+            }
+
             int padding = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding, DEFAULT_ICON_PADDING);
-            iconVal.setImageDrawable(icon);
-
-            RelativeLayout.LayoutParams params = (LayoutParams) iconVal.getLayoutParams();
+            RelativeLayout.LayoutParams params = (LayoutParams) rvIcon.getLayoutParams();
             params.rightMargin = padding;
-            iconVal.setLayoutParams(params);
-        }
-        titleVal.setTextSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleSize, DEFAULT_TITLE_SIZE));
-        titleVal.setTextColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_titleColor, DEFAULT_TITLE_COLOR));
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_title)) {
-            setTitle(a.getText(R.styleable.LayoutRowViewNormal_rv_title));
-        } else {
-            setTitle("");
+            rvIcon.setLayoutParams(params);
         }
 
-        hintTips.setTextSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_hintSize, DEFAULT_HINT_SIZE));
-        hintTips.setTextColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_hintColor, DEFAULT_HINT_COLOR));
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintTips)) {
-            setHint(a.getText(R.styleable.LayoutRowViewNormal_rv_hintTips));
-        } else {
-            setHint("");
+        if(rvTitle != null) {
+            rvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleSize, DEFAULT_TITLE_SIZE));
+            rvTitle.setTextColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_titleColor, DEFAULT_TITLE_COLOR));
+            if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_title)) {
+                setTitle(a.getText(R.styleable.LayoutRowViewNormal_rv_title));
+            } else {
+                setTitle("");
+            }
+        }
+
+        if(rvHint != null) {
+            setHint(0);
+            rvHint.setTextSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_hintSize, DEFAULT_HINT_SIZE));
+            rvHint.setTextColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_hintColor, DEFAULT_HINT_COLOR));
+            if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintTips)) {
+                setHint(a.getText(R.styleable.LayoutRowViewNormal_rv_hintTips));
+            } else {
+                setHint("");
+            }
         }
 
         int margin = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_innerMargin, DEFAULT_INNER_MARGIN);
         setInnerMargin(margin);
 
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_pointDrawable)) {
-            point.setImageDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_pointDrawable));
+        if(rvFlag != null && a.hasValue(R.styleable.LayoutRowViewNormal_rv_pointDrawable)) {
+            rvFlag.setImageDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_pointDrawable));
         }
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_rightDrawable)) {
-            rightImg.setImageDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_rightDrawable));
+        if(rvOption != null && a.hasValue(R.styleable.LayoutRowViewNormal_rv_rightDrawable)) {
+            rvOption.setImageDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_rightDrawable));
         }
 
-        showRight(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showRight, true));
+        showOption(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showRight, true));
         showHint(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showHint, false));
         showPoint(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showPoint, false));
 
@@ -97,45 +105,61 @@ public abstract class AbstractRowView extends RelativeLayout {
     }
 
     public void setTitle(int titleRes) {
-        titleVal.setText(titleRes);
+        if(rvTitle == null) return;
+
+        rvTitle.setText(titleRes);
     }
 
     public void setTitle(CharSequence hint) {
-        titleVal.setText(hint);
+        if(rvTitle == null) return;
+
+        rvTitle.setText(hint);
     }
 
     public void setIcon(int iconRes) {
-        if(iconRes <= 0) return;
+        if(rvTitle == null || iconRes <= 0) return;
 
         try {
             Drawable drawable = getContext().getResources().getDrawable(iconRes);
-            titleVal.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+            rvTitle.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void setHint(int hintRes) {
-        hintTips.setText(hintRes);
+        if(rvHint == null || hintRes <= 0) return;
+
+        rvHint.setText(hintRes);
     }
 
     public void setHint(CharSequence hint) {
-        hintTips.setText(hint);
+        if(rvHint == null) return;
+
+        rvHint.setText(hint);
     }
 
     public void showHead(boolean show) {
+        if(viewHead == null) return;
+
         viewHead.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     public void showHint(boolean show) {
+        if(rvHint == null) return;
+
         viewHint.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
-    public void showRight(boolean show) {
-        rightImg.setVisibility(show ? View.VISIBLE : View.GONE);
+    public void showOption(boolean show) {
+        if(rvOption == null) return;
+
+        rvOption.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     public void showPoint(boolean show) {
-        point.setVisibility(show ? View.VISIBLE : View.GONE);
+        if(rvFlag == null) return;
+
+        rvFlag.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 }
