@@ -162,4 +162,8 @@ public abstract class AbstractRowView extends RelativeLayout {
 
         rvFlag.setVisibility(show ? View.VISIBLE : View.GONE);
     }
+
+    public ImageView getIconView() {
+        return rvIcon;
+    }
 }
