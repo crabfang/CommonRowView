@@ -166,4 +166,20 @@ public abstract class AbstractRowView extends RelativeLayout {
     public ImageView getIconView() {
         return rvIcon;
     }
+
+    public TextView getTitleView() {
+        return rvTitle;
+    }
+
+    public TextView getHintView() {
+        return rvHint;
+    }
+
+    public String getTitle() {
+        return rvTitle == null ? "" : rvTitle.getText().toString();
+    }
+
+    public String getHint() {
+        return rvHint == null ? "" : rvHint.getText().toString();
+    }
 }
