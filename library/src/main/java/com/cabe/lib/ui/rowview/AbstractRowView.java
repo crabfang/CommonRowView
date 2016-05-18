@@ -79,8 +79,12 @@ public abstract class AbstractRowView extends RelativeLayout {
         int margin = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_innerMargin, DEFAULT_INNER_MARGIN);
         setInnerMargin(margin);
 
-        setFlagDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_pointDrawable));
-        setOptionDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_rightDrawable));
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_pointDrawable)) {
+            setFlagDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_pointDrawable));
+        }
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_rightDrawable)) {
+            setOptionDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_rightDrawable));
+        }
 
         showOption(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showRight, true));
         showHint(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showHint, false));
