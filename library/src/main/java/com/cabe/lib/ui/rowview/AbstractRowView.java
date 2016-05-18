@@ -65,8 +65,8 @@ public abstract class AbstractRowView extends RelativeLayout {
         }
 
         if(rvTitle != null) {
-            rvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleSize, DEFAULT_TITLE_SIZE));
-            rvTitle.setTextColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_titleColor, DEFAULT_TITLE_COLOR));
+            setTitleSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleSize, DEFAULT_TITLE_SIZE));
+            setTitleColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_titleColor, DEFAULT_TITLE_COLOR));
             if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_title)) {
                 setTitle(a.getText(R.styleable.LayoutRowViewNormal_rv_title));
             } else {
@@ -76,8 +76,8 @@ public abstract class AbstractRowView extends RelativeLayout {
 
         if(rvHint != null) {
             setHint(0);
-            rvHint.setTextSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_hintSize, DEFAULT_HINT_SIZE));
-            rvHint.setTextColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_hintColor, DEFAULT_HINT_COLOR));
+            setHintSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_hintSize, DEFAULT_HINT_SIZE));
+            setHintColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_hintColor, DEFAULT_HINT_COLOR));
             if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintTips)) {
                 setHint(a.getText(R.styleable.LayoutRowViewNormal_rv_hintTips));
             } else {
@@ -137,6 +137,30 @@ public abstract class AbstractRowView extends RelativeLayout {
         if(rvHint == null) return;
 
         rvHint.setText(hint);
+    }
+
+    public void setTitleSize(int unit, float size) {
+        if(rvTitle == null) return;
+
+        rvTitle.setTextSize(unit, size);
+    }
+
+    public void setTitleColor(int color) {
+        if(rvTitle == null) return;
+
+        rvTitle.setTextColor(color);
+    }
+
+    public void setHintSize(int unit, float size) {
+        if(rvHint == null) return;
+
+        rvHint.setTextSize(unit, size);
+    }
+
+    public void setHintColor(int color) {
+        if(rvHint == null) return;
+
+        rvHint.setTextColor(color);
     }
 
     public void showHead(boolean show) {
