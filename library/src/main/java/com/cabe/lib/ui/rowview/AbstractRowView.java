@@ -52,48 +52,35 @@ public abstract class AbstractRowView extends RelativeLayout {
 
     private void initAttr(Context context, AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LayoutRowViewNormal);
-        if(rvIcon != null) {
-            if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleDrawable)) {
-                Drawable icon = a.getDrawable(R.styleable.LayoutRowViewNormal_rv_titleDrawable);
-                rvIcon.setImageDrawable(icon);
-            }
 
-            int padding = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding, DEFAULT_ICON_PADDING);
-            RelativeLayout.LayoutParams params = (LayoutParams) rvIcon.getLayoutParams();
-            params.rightMargin = padding;
-            rvIcon.setLayoutParams(params);
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleDrawable)) {
+            setIcon(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_titleDrawable));
         }
 
-        if(rvTitle != null) {
-            setTitleSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleSize, DEFAULT_TITLE_SIZE));
-            setTitleColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_titleColor, DEFAULT_TITLE_COLOR));
-            if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_title)) {
-                setTitle(a.getText(R.styleable.LayoutRowViewNormal_rv_title));
-            } else {
-                setTitle("");
-            }
+        setIconPadding((int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding, DEFAULT_ICON_PADDING));
+
+        setTitleSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleSize, DEFAULT_TITLE_SIZE));
+        setTitleColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_titleColor, DEFAULT_TITLE_COLOR));
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_title)) {
+            setTitle(a.getText(R.styleable.LayoutRowViewNormal_rv_title));
+        } else {
+            setTitle("");
         }
 
-        if(rvHint != null) {
-            setHint(0);
-            setHintSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_hintSize, DEFAULT_HINT_SIZE));
-            setHintColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_hintColor, DEFAULT_HINT_COLOR));
-            if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintTips)) {
-                setHint(a.getText(R.styleable.LayoutRowViewNormal_rv_hintTips));
-            } else {
-                setHint("");
-            }
+        setHint(0);
+        setHintSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_hintSize, DEFAULT_HINT_SIZE));
+        setHintColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_hintColor, DEFAULT_HINT_COLOR));
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintTips)) {
+            setHint(a.getText(R.styleable.LayoutRowViewNormal_rv_hintTips));
+        } else {
+            setHint("");
         }
 
         int margin = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_innerMargin, DEFAULT_INNER_MARGIN);
         setInnerMargin(margin);
 
-        if(rvFlag != null && a.hasValue(R.styleable.LayoutRowViewNormal_rv_pointDrawable)) {
-            rvFlag.setImageDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_pointDrawable));
-        }
-        if(rvOption != null && a.hasValue(R.styleable.LayoutRowViewNormal_rv_rightDrawable)) {
-            rvOption.setImageDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_rightDrawable));
-        }
+        setFlagDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_pointDrawable));
+        setOptionDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_rightDrawable));
 
         showOption(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showRight, true));
         showHint(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showHint, false));
@@ -117,14 +104,15 @@ public abstract class AbstractRowView extends RelativeLayout {
     }
 
     public void setIcon(int iconRes) {
-        if(rvTitle == null || iconRes <= 0) return;
+        if(rvIcon == null || iconRes <= 0) return;
 
-        try {
-            Drawable drawable = getContext().getResources().getDrawable(iconRes);
-            rvTitle.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        rvIcon.setImageResource(iconRes);
+    }
+
+    public void setIcon(Drawable icon) {
+        if(rvIcon == null) return;
+
+        rvIcon.setImageDrawable(icon);
     }
 
     public void setHint(int hintRes) {
@@ -163,6 +151,26 @@ public abstract class AbstractRowView extends RelativeLayout {
         rvHint.setTextColor(color);
     }
 
+    public void setIconPadding(int padding) {
+        if(rvIcon == null) return;
+
+        RelativeLayout.LayoutParams params = (LayoutParams) rvIcon.getLayoutParams();
+        params.rightMargin = padding;
+        rvIcon.setLayoutParams(params);
+    }
+
+    public void setFlagDrawable(Drawable drawable) {
+        if(rvFlag == null) return;
+
+        rvFlag.setImageDrawable(drawable);
+    }
+
+    public void setOptionDrawable(Drawable drawable) {
+        if(rvOption == null) return;
+
+        rvOption.setImageDrawable(drawable);
+    }
+
     public void showHead(boolean show) {
         if(viewHead == null) return;
 
@@ -187,6 +195,14 @@ public abstract class AbstractRowView extends RelativeLayout {
         rvFlag.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
+    public String getTitle() {
+        return rvTitle == null ? "" : rvTitle.getText().toString();
+    }
+
+    public String getHint() {
+        return rvHint == null ? "" : rvHint.getText().toString();
+    }
+
     public ImageView getIconView() {
         return rvIcon;
     }
@@ -197,13 +213,5 @@ public abstract class AbstractRowView extends RelativeLayout {
 
     public TextView getHintView() {
         return rvHint;
-    }
-
-    public String getTitle() {
-        return rvTitle == null ? "" : rvTitle.getText().toString();
-    }
-
-    public String getHint() {
-        return rvHint == null ? "" : rvHint.getText().toString();
     }
 }
