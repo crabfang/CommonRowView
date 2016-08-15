@@ -1,6 +1,8 @@
 package com.cabe.lib.ui.rowview;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -13,8 +15,22 @@ import android.widget.TextView;
  * Created by cabe on 16/3/28.
  */
 public class HorizontalRowView extends AbstractRowView {
+
+    public HorizontalRowView(Context context) {
+        super(context);
+    }
+
     public HorizontalRowView(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    public HorizontalRowView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public HorizontalRowView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
     }
 
     @Override

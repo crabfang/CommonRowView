@@ -1,8 +1,10 @@
 package com.cabe.lib.ui.rowview;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -31,6 +33,31 @@ public abstract class AbstractRowView extends RelativeLayout {
     protected int DEFAULT_HINT_SIZE = 0;
     protected int DEFAULT_HINT_COLOR = 0xFF999999;
 
+    public AbstractRowView(Context context) {
+        this(context, null);
+    }
+
+    public AbstractRowView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public AbstractRowView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+
+        initDefaultConfig(context);
+        initView(context);
+        initAttr(context, attrs, defStyleAttr, 0);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public AbstractRowView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+
+        initDefaultConfig(context);
+        initView(context);
+        initAttr(context, attrs, defStyleAttr, defStyleRes);
+    }
+
     private void initDefaultConfig(Context context) {
         float density = context.getResources().getDisplayMetrics().density;
         DEFAULT_ICON_PADDING = (int) (density * 5);
@@ -39,19 +66,11 @@ public abstract class AbstractRowView extends RelativeLayout {
         DEFAULT_HINT_SIZE = (int) (density * 12);
     }
 
-    public AbstractRowView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-
-        initDefaultConfig(context);
-        initView(context);
-        initAttr(context, attrs);
-    }
-
     protected abstract void initView(Context context);
     protected abstract void setInnerMargin(int margin);
 
-    private void initAttr(Context context, AttributeSet attrs) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LayoutRowViewNormal);
+    private void initAttr(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LayoutRowViewNormal, defStyleAttr, defStyleRes);
 
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleDrawable)) {
             setIcon(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_titleDrawable));
