@@ -3,6 +3,7 @@ package com.cabe.lib.ui.rowview;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -69,7 +70,7 @@ public abstract class AbstractRowView extends RelativeLayout {
     protected abstract void initView(Context context);
     protected abstract void setInnerMargin(int margin);
 
-    private void initAttr(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    protected void initAttr(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LayoutRowViewNormal, defStyleAttr, defStyleRes);
 
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleDrawable)) {
@@ -136,6 +137,12 @@ public abstract class AbstractRowView extends RelativeLayout {
         if(rvIcon == null) return;
 
         rvIcon.setImageDrawable(icon);
+    }
+
+    public void setIcon(Bitmap bmp) {
+        if(rvIcon == null) return;
+
+        rvIcon.setImageBitmap(bmp);
     }
 
     public void setHint(int hintRes) {

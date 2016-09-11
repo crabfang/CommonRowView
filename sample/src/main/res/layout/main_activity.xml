@@ -34,4 +34,21 @@
         android:tag="Vertical Tag"
         android:onClick="onClick" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#333333" />
+
+    <com.cabe.lib.ui.rowview.TipsRowView
+        android:id="@+id/frag_me_row_bank_tips"
+        style="@style/RowViewStyleV"
+        app:rv_title="Vertical Title"
+        app:rv_hintTips="Vertical Hint"
+        app:rv_tips_1="Vertical Tips 1"
+        app:rv_tips_2="Vertical Tips 2"
+        app:rv_innerMargin="2dp"
+        app:rv_showHint="true"
+        android:tag="Vertical Tag"
+        android:onClick="onClick" />
+
 </LinearLayout>
