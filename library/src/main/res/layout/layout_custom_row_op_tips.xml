@@ -15,7 +15,7 @@
 
     <LinearLayout
         android:id="@+id/layout_custom_row_op_view_info"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/layout_custom_row_op_icon"
