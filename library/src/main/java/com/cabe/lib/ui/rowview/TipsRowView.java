@@ -21,6 +21,7 @@ public class TipsRowView extends AbstractRowView {
     private final static int DEFAULT_TIPS_SIZE = 12;
     private final static int DEFAULT_TIPS_COLOR = 0xFF999999;
 
+    private View viewTips;
     private TextView rvTips1;
     private TextView rvTips2;
 
@@ -52,6 +53,7 @@ public class TipsRowView extends AbstractRowView {
         rvFlag = (ImageView) findViewById(R.id.layout_custom_row_op_head_point);
         rvHint = (TextView) findViewById(R.id.layout_custom_row_op_hint_tips);
 
+        viewTips = findViewById(R.id.layout_custom_row_op_view_tips);
         rvTips1 = (TextView) findViewById(R.id.layout_custom_row_op_tips_info);
         rvTips2 = (TextView) findViewById(R.id.layout_custom_row_op_tips_info_second);
     }
@@ -134,6 +136,12 @@ public class TipsRowView extends AbstractRowView {
         if(rvTips2 == null) return;
 
         rvTips2.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    public void showTipsView(boolean show) {
+        if(viewTips == null) return;
+
+        viewTips.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
