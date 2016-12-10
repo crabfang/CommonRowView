@@ -148,12 +148,13 @@ public abstract class AbstractRowView extends RelativeLayout {
         if(rvIcon == null) return;
 
         rvIcon.setImageBitmap(bmp);
+        rvIcon.setVisibility(bmp == null ? View.GONE : View.VISIBLE);
     }
 
     public void setHint(int hintRes) {
         if(rvHint == null) return;
 
-        rvIcon.setVisibility(hintRes <= 0 ? View.GONE : View.VISIBLE);
+        rvHint.setVisibility(hintRes <= 0 ? View.GONE : View.VISIBLE);
         if(hintRes > 0) {
             rvHint.setText(hintRes);
         }

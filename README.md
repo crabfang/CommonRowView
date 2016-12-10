@@ -2,7 +2,7 @@
 ``` xml
 
 dependencies {
-    compile 'com.cabe.lib.ui:RowView:1.2.1'
+    compile 'com.cabe.lib.ui:RowView:1.2.2'
 }
 
 ``` 
