@@ -27,7 +27,7 @@ dependencies {
         app:rv_hintTips="hint"
         android:tag="tag"
         android:onClick="onClick" />
-         
+
 ```
 
 #### VerticalRowView
@@ -46,7 +46,7 @@ dependencies {
         app:rv_innerMargin="2dp"
         android:tag="tag"
         android:onClick="onClick" />
-         
+
 ```
 
 #### TipsRowView
@@ -67,7 +67,7 @@ dependencies {
         app:rv_tips_2="tips2"
         android:tag="tag"
         android:onClick="onClick" />
-         
+
 ```
 
 #### GapLineView
@@ -83,5 +83,5 @@ dependencies {
         app:gl_dashColor="#FF0000"
         app:gl_gapWidth="6dp"
         app:gl_gapColor="#0000FF00" />
-         
+
 ```
