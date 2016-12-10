@@ -17,7 +17,7 @@
         <item name="android:background">@drawable/bg_row_view_normal</item>
     </style>
 
-    <style name="RowViewStyleV" parent="RowViewStyle">
+    <style name="RowViewStyle.V">
         <item name="android:layout_height">68dp</item>
     </style>
 

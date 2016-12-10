@@ -143,12 +143,4 @@ public class TipsRowView extends AbstractRowView {
 
         viewTips.setVisibility(show ? View.VISIBLE : View.GONE);
     }
-
-    @Override
-    public void setHint(CharSequence hint) {
-        super.setHint(hint);
-        if(viewHint != null) {
-            viewHint.setVisibility(TextUtils.isEmpty(hint) ? View.GONE : View.VISIBLE);
-        }
-    }
 }

@@ -19,6 +19,7 @@
         android:layout_toRightOf="@+id/layout_custom_row_op_icon"
         android:layout_toLeftOf="@+id/layout_custom_row_op_arrow"
         android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
         android:orientation="vertical" >
 
         <LinearLayout

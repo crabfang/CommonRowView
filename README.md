@@ -2,7 +2,7 @@
 ``` xml
 
 dependencies {
-    compile 'com.cabe.lib.ui:RowView:1.1.3'
+    compile 'com.cabe.lib.ui:RowView:1.1.5'
 }
 
 ``` 
@@ -44,6 +44,27 @@ dependencies {
         app:rv_showHint="true"
         app:rv_hintTips="hint"
         app:rv_innerMargin="2dp"
+        android:tag="tag"
+        android:onClick="onClick" />
+         
+```
+
+#### TipsRowView
+
+``` xml
+
+    <com.cabe.lib.ui.rowview.TipsRowView
+        android:id="@+id/frag_me_row_bank_v"
+        style="@style/RowViewStyleV"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:rv_title="title"
+        app:rv_titleDrawablePadding="5dp"
+        app:rv_titleDrawable="@drawable/icon_row"
+        app:rv_showHint="true"
+        app:rv_hintTips="hint"
+        app:rv_innerMargin="2dp"
+        app:rv_tips_1="tips1"
+        app:rv_tips_2="tips2"
         android:tag="tag"
         android:onClick="onClick" />
          

@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -128,15 +129,19 @@ public abstract class AbstractRowView extends RelativeLayout {
     }
 
     public void setIcon(int iconRes) {
-        if(rvIcon == null || iconRes <= 0) return;
+        if(rvIcon == null) return;
 
-        rvIcon.setImageResource(iconRes);
+        rvIcon.setVisibility(iconRes <= 0 ? View.GONE : View.VISIBLE);
+        if(iconRes > 0) {
+            rvIcon.setImageResource(iconRes);
+        }
     }
 
     public void setIcon(Drawable icon) {
         if(rvIcon == null) return;
 
         rvIcon.setImageDrawable(icon);
+        rvIcon.setVisibility(icon == null ? View.GONE : View.VISIBLE);
     }
 
     public void setIcon(Bitmap bmp) {
@@ -146,15 +151,19 @@ public abstract class AbstractRowView extends RelativeLayout {
     }
 
     public void setHint(int hintRes) {
-        if(rvHint == null || hintRes <= 0) return;
+        if(rvHint == null) return;
 
-        rvHint.setText(hintRes);
+        rvIcon.setVisibility(hintRes <= 0 ? View.GONE : View.VISIBLE);
+        if(hintRes > 0) {
+            rvHint.setText(hintRes);
+        }
     }
 
     public void setHint(CharSequence hint) {
         if(rvHint == null) return;
 
         rvHint.setText(hint);
+        rvHint.setVisibility(TextUtils.isEmpty(hint) ? View.GONE : View.VISIBLE);
     }
 
     public void setTitleSize(int unit, float size) {
