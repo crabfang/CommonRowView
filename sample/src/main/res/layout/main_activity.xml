@@ -51,4 +51,26 @@
         android:tag="Vertical Tag"
         android:onClick="onClick" />
 
+    <com.cabe.lib.ui.line.GapLineView
+        android:id="@+id/frag_me_line_gap_v"
+        android:layout_width="1dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        app:gl_direct="vertical"
+        app:gl_dashWidth="8dp"
+        app:gl_dashColor="#FF0000"
+        app:gl_gapWidth="6dp"
+        app:gl_gapColor="#0000FF00" />
+
+    <com.cabe.lib.ui.line.GapLineView
+        android:id="@+id/frag_me_line_gap_h"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        app:gl_dashWidth="8dp"
+        app:gl_dashColor="#FF0000"
+        app:gl_gapWidth="6dp"
+        app:gl_gapColor="#0000FF00" />
+
 </LinearLayout>

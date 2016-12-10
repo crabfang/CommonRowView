@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="GapLineView">
+        <attr name="gl_gapColor" format="color|reference" />
+        <attr name="gl_dashColor" format="color|reference" />
+        <attr name="gl_gapWidth" format="dimension|reference" />
+        <attr name="gl_dashWidth" format="dimension|reference" />
+        <attr name="gl_isSolid" format="boolean|reference" />
+        <attr name="gl_direct" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+
+</resources>

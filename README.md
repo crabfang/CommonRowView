@@ -2,7 +2,7 @@
 ``` xml
 
 dependencies {
-    compile 'com.cabe.lib.ui:RowView:1.1.5'
+    compile 'com.cabe.lib.ui:RowView:1.2.1'
 }
 
 ``` 
@@ -67,5 +67,21 @@ dependencies {
         app:rv_tips_2="tips2"
         android:tag="tag"
         android:onClick="onClick" />
+         
+```
+
+#### GapLineView
+
+``` xml
+
+    <com.cabe.lib.ui.line.GapLineView
+        android:id="@+id/frag_me_line_gap_h"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        app:gl_dashWidth="8dp"
+        app:gl_dashColor="#FF0000"
+        app:gl_gapWidth="6dp"
+        app:gl_gapColor="#0000FF00" />
          
 ```
