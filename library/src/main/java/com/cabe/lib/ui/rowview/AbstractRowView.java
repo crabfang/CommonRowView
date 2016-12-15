@@ -76,9 +76,10 @@ public abstract class AbstractRowView extends RelativeLayout {
 
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleDrawable)) {
             setIcon(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_titleDrawable));
+            setIconPadding((int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding, DEFAULT_ICON_PADDING));
+        } else {
+            setIconPadding(0);
         }
-
-        setIconPadding((int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding, DEFAULT_ICON_PADDING));
 
         setTitleSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleSize, DEFAULT_TITLE_SIZE));
         setTitleColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_titleColor, DEFAULT_TITLE_COLOR));
@@ -253,5 +254,9 @@ public abstract class AbstractRowView extends RelativeLayout {
 
     public TextView getHintView() {
         return rvHint;
+    }
+
+    public ImageView getOpView() {
+        return rvOption;
     }
 }
