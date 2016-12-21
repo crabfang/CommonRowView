@@ -15,7 +15,7 @@ import com.cabe.lib.ui.rowview.R;
  * 操作栏抽象类
  * Created by cabe on 16/3/28.
  */
-public class GapLineView extends View {
+public class DashLineView extends View {
     private int DEFAULT_GAP_COLOR = 0x00999999;
     private int DEFAULT_DASH_COLOR = 0xFF999999;
     private int DEFAULT_GAP_WIDTH = 0;
@@ -30,15 +30,15 @@ public class GapLineView extends View {
 
     private Paint paint = new Paint();
 
-    public GapLineView(Context context) {
+    public DashLineView(Context context) {
         this(context, null);
     }
 
-    public GapLineView(Context context, AttributeSet attrs) {
+    public DashLineView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public GapLineView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DashLineView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         initDefaultConfig(context);
@@ -46,7 +46,7 @@ public class GapLineView extends View {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public GapLineView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public DashLineView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
 
         initDefaultConfig(context);
@@ -54,21 +54,24 @@ public class GapLineView extends View {
     }
 
     private void initDefaultConfig(Context context) {
+        DEFAULT_GAP_COLOR = 0x00999999;
+        DEFAULT_DASH_COLOR = 0xFF999999;
+
         float density = context.getResources().getDisplayMetrics().density;
         DEFAULT_GAP_WIDTH = (int) (density * 2);
         DEFAULT_DASH_WIDTH = (int) (density * 4);
     }
 
     protected void initAttr(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.GapLineView, defStyleAttr, defStyleRes);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DashLineView, defStyleAttr, defStyleRes);
 
-        gapColor = a.getColor(R.styleable.GapLineView_gl_gapColor, DEFAULT_GAP_COLOR);
-        dashColor = a.getColor(R.styleable.GapLineView_gl_dashColor, DEFAULT_DASH_COLOR);
-        gapWidth = (int) a.getDimension(R.styleable.GapLineView_gl_gapWidth, DEFAULT_GAP_WIDTH);
-        dashWidth = (int) a.getDimension(R.styleable.GapLineView_gl_dashWidth, DEFAULT_DASH_WIDTH);
-        isSolid = a.getBoolean(R.styleable.GapLineView_gl_isSolid, false);
+        gapColor = a.getColor(R.styleable.DashLineView_gl_gapColor, DEFAULT_GAP_COLOR);
+        dashColor = a.getColor(R.styleable.DashLineView_gl_dashColor, DEFAULT_DASH_COLOR);
+        gapWidth = (int) a.getDimension(R.styleable.DashLineView_gl_gapWidth, DEFAULT_GAP_WIDTH);
+        dashWidth = (int) a.getDimension(R.styleable.DashLineView_gl_dashWidth, DEFAULT_DASH_WIDTH);
+        isSolid = a.getBoolean(R.styleable.DashLineView_gl_isSolid, false);
 
-        int directVal = a.getInteger(R.styleable.GapLineView_gl_direct, Direct.horizontal.toValue());
+        int directVal = a.getInteger(R.styleable.DashLineView_gl_direct, Direct.horizontal.toValue());
         direct = directVal == Direct.horizontal.toValue() ? Direct.horizontal : Direct.vertical;
         a.recycle();
 
@@ -122,6 +125,7 @@ public class GapLineView extends View {
     private void drawGapV(Canvas canvas) {
         int height = getHeight();
 
+        //DashPathEffect的虚线效果某些机型有兼容性问题
         int offset = 0;
         while(offset < height) {
             paint.setColor(dashColor);

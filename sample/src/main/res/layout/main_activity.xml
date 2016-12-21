@@ -51,7 +51,7 @@
         android:tag="Vertical Tag"
         android:onClick="onClick" />
 
-    <com.cabe.lib.ui.line.GapLineView
+    <com.cabe.lib.ui.line.DashLineView
         android:id="@+id/frag_me_line_gap_v"
         android:layout_width="1dp"
         android:layout_height="200dp"
@@ -63,7 +63,7 @@
         app:gl_gapWidth="6dp"
         app:gl_gapColor="#0000FF00" />
 
-    <com.cabe.lib.ui.line.GapLineView
+    <com.cabe.lib.ui.line.DashLineView
         android:id="@+id/frag_me_line_gap_h"
         android:layout_width="match_parent"
         android:layout_height="1dp"

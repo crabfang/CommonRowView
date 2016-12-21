@@ -2,7 +2,7 @@
 ``` xml
 
 dependencies {
-    compile 'com.cabe.lib.ui:RowView:1.2.2'
+    compile 'com.cabe.lib.ui:RowView:1.2.4'
 }
 
 ``` 
@@ -74,7 +74,7 @@ dependencies {
 
 ``` xml
 
-    <com.cabe.lib.ui.line.GapLineView
+    <com.cabe.lib.ui.line.DashLineView
         android:id="@+id/frag_me_line_gap_h"
         android:layout_width="match_parent"
         android:layout_height="1dp"
