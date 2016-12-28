@@ -10,7 +10,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -45,17 +44,16 @@ public class TipsRowView extends AbstractRowView {
     @Override
         protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_tips, this);
-        viewHead = findViewById(R.id.layout_custom_row_op_head);
-        viewHint = (LinearLayout) findViewById(R.id.layout_custom_row_op_hint);
+        viewHead = findViewById(R.id.layout_custom_row_t_view_head);
 
-        rvIcon = (ImageView) findViewById(R.id.layout_custom_row_op_icon);
-        rvTitle = (TextView) findViewById(R.id.layout_custom_row_op_head_title);
-        rvFlag = (ImageView) findViewById(R.id.layout_custom_row_op_head_point);
-        rvHint = (TextView) findViewById(R.id.layout_custom_row_op_hint_tips);
+        rvIcon = (ImageView) findViewById(R.id.layout_custom_row_t_icon);
+        rvTitle = (TextView) findViewById(R.id.layout_custom_row_t_head_title);
+        rvFlag = (ImageView) findViewById(R.id.layout_custom_row_t_head_point);
+        rvHint = (TextView) findViewById(R.id.layout_custom_row_t_hint_tips);
 
-        viewTips = findViewById(R.id.layout_custom_row_op_view_tips);
-        rvTips1 = (TextView) findViewById(R.id.layout_custom_row_op_tips_info);
-        rvTips2 = (TextView) findViewById(R.id.layout_custom_row_op_tips_info_second);
+        viewTips = findViewById(R.id.layout_custom_row_t_view_tips);
+        rvTips1 = (TextView) findViewById(R.id.layout_custom_row_t_tips_info);
+        rvTips2 = (TextView) findViewById(R.id.layout_custom_row_t_tips_info_second);
     }
 
     @Override
@@ -84,15 +82,6 @@ public class TipsRowView extends AbstractRowView {
         }
 
         a.recycle();
-    }
-
-    @Override
-    protected void setInnerMargin(int margin) {
-        if(viewHint != null) {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHint.getLayoutParams();
-            params.topMargin = margin;
-            viewHint.setLayoutParams(params);
-        }
     }
 
     public void setTipsColor1(int color) {

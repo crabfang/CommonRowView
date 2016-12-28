@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/layout_custom_row_op_icon"
+        android:id="@+id/layout_custom_row_t_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -14,22 +14,22 @@
         android:contentDescription="@string/app_name" />
 
     <LinearLayout
-        android:id="@+id/layout_custom_row_op_view_info"
+        android:id="@+id/layout_custom_row_t_view_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/layout_custom_row_op_icon"
-        android:layout_toLeftOf="@+id/layout_custom_row_op_view_tips"
+        android:layout_toRightOf="@+id/layout_custom_row_t_icon"
+        android:layout_toLeftOf="@+id/layout_custom_row_t_view_tips"
         android:orientation="vertical" >
 
         <LinearLayout
-            android:id="@+id/layout_custom_row_op_head"
+            android:id="@+id/layout_custom_row_t_view_head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
             <TextView
-                android:id="@+id/layout_custom_row_op_head_title"
+                android:id="@+id/layout_custom_row_t_head_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -39,7 +39,7 @@
                 tools:text="@string/app_name" />
 
             <ImageView
-                android:id="@+id/layout_custom_row_op_head_point"
+                android:id="@+id/layout_custom_row_t_head_point"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
@@ -48,29 +48,21 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layout_custom_row_op_hint"
+        <TextView
+            android:id="@+id/layout_custom_row_t_hint_tips"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/layout_custom_row_op_hint_tips"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:textSize="12sp"
-                android:textColor="#999999"
-                tools:text="@string/app_name" />
-
-        </LinearLayout>
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            tools:text="@string/app_name" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_custom_row_op_view_tips"
+        android:id="@+id/layout_custom_row_t_view_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -80,7 +72,7 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/layout_custom_row_op_tips_info"
+            android:id="@+id/layout_custom_row_t_tips_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -90,7 +82,7 @@
             tools:text="@string/app_name" />
 
         <TextView
-            android:id="@+id/layout_custom_row_op_tips_info_second"
+            android:id="@+id/layout_custom_row_t_tips_info_second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"

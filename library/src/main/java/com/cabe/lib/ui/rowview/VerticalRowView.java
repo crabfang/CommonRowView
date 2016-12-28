@@ -6,7 +6,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -35,22 +35,13 @@ public class VerticalRowView extends AbstractRowView {
     @Override
         protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_vertical, this);
-        viewHead = findViewById(R.id.layout_custom_row_op_head);
-        viewHint = (LinearLayout) findViewById(R.id.layout_custom_row_op_hint);
+        viewHead = findViewById(R.id.layout_custom_row_v_view_head);
+        viewOption = (RelativeLayout) findViewById(R.id.layout_custom_row_v_view_option);
 
-        rvIcon = (ImageView) findViewById(R.id.layout_custom_row_op_icon);
-        rvTitle = (TextView) findViewById(R.id.layout_custom_row_op_head_title);
-        rvFlag = (ImageView) findViewById(R.id.layout_custom_row_op_head_point);
-        rvHint = (TextView) findViewById(R.id.layout_custom_row_op_hint_tips);
-        rvOption = (ImageView) findViewById(R.id.layout_custom_row_op_arrow);
-    }
-
-    @Override
-    protected void setInnerMargin(int margin) {
-        if(viewHint != null) {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHint.getLayoutParams();
-            params.topMargin = margin;
-            viewHint.setLayoutParams(params);
-        }
+        rvIcon = (ImageView) findViewById(R.id.layout_custom_row_v_icon);
+        rvTitle = (TextView) findViewById(R.id.layout_custom_row_v_head_title);
+        rvFlag = (ImageView) findViewById(R.id.layout_custom_row_v_head_point);
+        rvHint = (TextView) findViewById(R.id.layout_custom_row_v_hint_tips);
+        rvOption = (ImageView) findViewById(R.id.layout_custom_row_v_op_arrow);
     }
 }

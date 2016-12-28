@@ -30,7 +30,7 @@
         app:rv_titleDrawable="@drawable/rp_icon_me_card"
         app:rv_showHint="true"
         app:rv_hintTips="Vertical Hint"
-        app:rv_innerMargin="2dp"
+        app:rv_optionPadding="2dp"
         android:tag="Vertical Tag"
         android:onClick="onClick" />
 
@@ -46,7 +46,7 @@
         app:rv_hintTips="Vertical Hint"
         app:rv_tips_1="Vertical Tips 1"
         app:rv_tips_2="Vertical Tips 2"
-        app:rv_innerMargin="2dp"
+        app:rv_optionPadding="2dp"
         app:rv_showHint="true"
         android:tag="Vertical Tag"
         android:onClick="onClick" />

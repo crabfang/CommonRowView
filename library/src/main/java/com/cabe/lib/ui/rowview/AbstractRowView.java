@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,7 +20,7 @@ import android.widget.TextView;
  */
 public abstract class AbstractRowView extends RelativeLayout {
     protected View viewHead;
-    protected LinearLayout viewHint;
+    protected RelativeLayout viewOption;
     protected ImageView rvIcon;
     protected TextView rvTitle;
     protected ImageView rvFlag;
@@ -29,7 +28,7 @@ public abstract class AbstractRowView extends RelativeLayout {
     protected ImageView rvOption;
 
     protected int DEFAULT_ICON_PADDING = 0;
-    protected int DEFAULT_INNER_MARGIN = 0;
+    protected int DEFAULT_OPTION_PADDING = 0;
     protected int DEFAULT_TITLE_SIZE = 0;
     protected int DEFAULT_TITLE_COLOR = 0xFF666666;
     protected int DEFAULT_HINT_SIZE = 0;
@@ -63,13 +62,12 @@ public abstract class AbstractRowView extends RelativeLayout {
     private void initDefaultConfig(Context context) {
         float density = context.getResources().getDisplayMetrics().density;
         DEFAULT_ICON_PADDING = (int) (density * 5);
-        DEFAULT_INNER_MARGIN = (int) (density * 2);
+        DEFAULT_OPTION_PADDING = (int) (density * 10);
         DEFAULT_TITLE_SIZE = (int) (density * 16);
         DEFAULT_HINT_SIZE = (int) (density * 12);
     }
 
     protected abstract void initView(Context context);
-    protected abstract void setInnerMargin(int margin);
 
     protected void initAttr(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LayoutRowViewNormal, defStyleAttr, defStyleRes);
@@ -98,8 +96,8 @@ public abstract class AbstractRowView extends RelativeLayout {
             setHint("");
         }
 
-        int margin = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_innerMargin, DEFAULT_INNER_MARGIN);
-        setInnerMargin(margin);
+        int optionPadding = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_optionPadding, DEFAULT_OPTION_PADDING);
+        setOptionPadding(optionPadding);
 
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_pointDrawable)) {
             setFlagDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_pointDrawable));
@@ -200,6 +198,14 @@ public abstract class AbstractRowView extends RelativeLayout {
         rvIcon.setLayoutParams(params);
     }
 
+    public void setOptionPadding(int padding) {
+        if(viewOption != null) {
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) viewOption.getLayoutParams();
+            params.leftMargin = padding;
+            viewOption.setLayoutParams(params);
+        }
+    }
+
     public void setFlagDrawable(Drawable drawable) {
         if(rvFlag == null) return;
 
@@ -212,6 +218,12 @@ public abstract class AbstractRowView extends RelativeLayout {
         rvOption.setImageDrawable(drawable);
     }
 
+    public void setOptionDrawableRes(int resId) {
+        if(rvOption == null || resId <= 0) return;
+
+        rvOption.setImageResource(resId);
+    }
+
     public void showHead(boolean show) {
         if(viewHead == null) return;
 
@@ -221,7 +233,7 @@ public abstract class AbstractRowView extends RelativeLayout {
     public void showHint(boolean show) {
         if(rvHint == null) return;
 
-        viewHint.setVisibility(show ? View.VISIBLE : View.GONE);
+        rvHint.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     public void showOption(boolean show) {
@@ -256,7 +268,11 @@ public abstract class AbstractRowView extends RelativeLayout {
         return rvHint;
     }
 
-    public ImageView getOpView() {
+    public RelativeLayout getOpView() {
+        return viewOption;
+    }
+
+    public ImageView getOpImage() {
         return rvOption;
     }
 }
