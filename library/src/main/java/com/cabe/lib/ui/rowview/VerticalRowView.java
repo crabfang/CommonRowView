@@ -35,7 +35,8 @@ public class VerticalRowView extends AbstractRowView {
     @Override
         protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_vertical, this);
-        viewHead = findViewById(R.id.layout_custom_row_v_view_head);
+        viewTitle = findViewById(R.id.layout_custom_row_v_view_head);
+        viewHint = (RelativeLayout) findViewById(R.id.layout_custom_row_v_view_hint);
         viewOption = (RelativeLayout) findViewById(R.id.layout_custom_row_v_view_option);
 
         rvIcon = (ImageView) findViewById(R.id.layout_custom_row_v_icon);

@@ -10,6 +10,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -44,7 +45,8 @@ public class TipsRowView extends AbstractRowView {
     @Override
         protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_tips, this);
-        viewHead = findViewById(R.id.layout_custom_row_t_view_head);
+        viewTitle = findViewById(R.id.layout_custom_row_t_view_title);
+        viewHint = (RelativeLayout) findViewById(R.id.layout_custom_row_t_view_hint);
 
         rvIcon = (ImageView) findViewById(R.id.layout_custom_row_t_icon);
         rvTitle = (TextView) findViewById(R.id.layout_custom_row_t_head_title);

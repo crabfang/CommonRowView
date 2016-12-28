@@ -19,7 +19,8 @@ import android.widget.TextView;
  * Created by cabe on 16/3/28.
  */
 public abstract class AbstractRowView extends RelativeLayout {
-    protected View viewHead;
+    protected View viewTitle;
+    protected RelativeLayout viewHint;
     protected RelativeLayout viewOption;
     protected ImageView rvIcon;
     protected TextView rvTitle;
@@ -153,7 +154,7 @@ public abstract class AbstractRowView extends RelativeLayout {
     public void setHint(int hintRes) {
         if(rvHint == null) return;
 
-        rvHint.setVisibility(hintRes <= 0 ? View.GONE : View.VISIBLE);
+        showHint(hintRes > 0);
         if(hintRes > 0) {
             rvHint.setText(hintRes);
         }
@@ -225,15 +226,15 @@ public abstract class AbstractRowView extends RelativeLayout {
     }
 
     public void showHead(boolean show) {
-        if(viewHead == null) return;
+        if(viewTitle == null) return;
 
-        viewHead.setVisibility(show ? View.VISIBLE : View.GONE);
+        viewTitle.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     public void showHint(boolean show) {
-        if(rvHint == null) return;
+        if(viewHint == null) return;
 
-        rvHint.setVisibility(show ? View.VISIBLE : View.GONE);
+        viewHint.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     public void showOption(boolean show) {
@@ -256,23 +257,31 @@ public abstract class AbstractRowView extends RelativeLayout {
         return rvHint == null ? "" : rvHint.getText().toString();
     }
 
-    public ImageView getIconView() {
-        return rvIcon;
+    public View getViewTitle() {
+        return viewTitle;
     }
 
-    public TextView getTitleView() {
-        return rvTitle;
+    public View getViewHint() {
+        return viewHint;
     }
 
-    public TextView getHintView() {
-        return rvHint;
-    }
-
-    public RelativeLayout getOpView() {
+    public RelativeLayout getViewOption() {
         return viewOption;
     }
 
-    public ImageView getOpImage() {
+    public TextView getTextTitle() {
+        return rvTitle;
+    }
+
+    public TextView getTextHint() {
+        return rvHint;
+    }
+
+    public ImageView getImageIcon() {
+        return rvIcon;
+    }
+
+    public ImageView getImageOP() {
         return rvOption;
     }
 }
