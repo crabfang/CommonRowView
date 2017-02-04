@@ -45,4 +45,11 @@ public class HorizontalRowView extends AbstractRowView {
         rvHint = (TextView) findViewById(R.id.layout_custom_row_h_hint_tips);
         rvOption = (ImageView) findViewById(R.id.layout_custom_row_h_op_arrow);
     }
+
+    @Override
+    public void setHintMargin(int margin) {
+        RelativeLayout.LayoutParams params = (LayoutParams) viewHint.getLayoutParams();
+        params.leftMargin = margin;
+        viewHint.setLayoutParams(params);
+    }
 }

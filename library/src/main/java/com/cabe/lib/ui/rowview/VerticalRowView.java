@@ -6,6 +6,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -44,5 +45,12 @@ public class VerticalRowView extends AbstractRowView {
         rvFlag = (ImageView) findViewById(R.id.layout_custom_row_v_head_point);
         rvHint = (TextView) findViewById(R.id.layout_custom_row_v_hint_tips);
         rvOption = (ImageView) findViewById(R.id.layout_custom_row_v_op_arrow);
+    }
+
+    @Override
+    public void setHintMargin(int margin) {
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHint.getLayoutParams();
+        params.topMargin = margin;
+        viewHint.setLayoutParams(params);
     }
 }

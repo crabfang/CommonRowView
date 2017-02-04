@@ -107,6 +107,11 @@ public abstract class AbstractRowView extends RelativeLayout {
             setOptionDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_rightDrawable));
         }
 
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintMargin)) {
+            int hintMargin = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_hintMargin, 0);
+            setHintMargin(hintMargin);
+        }
+
         showOption(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showRight, true));
         showHint(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showHint, false));
         showPoint(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showPoint, false));
@@ -224,6 +229,8 @@ public abstract class AbstractRowView extends RelativeLayout {
 
         rvOption.setImageResource(resId);
     }
+
+    public abstract void setHintMargin(int margin);
 
     public void showHead(boolean show) {
         if(viewTitle == null) return;

@@ -10,6 +10,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -84,6 +85,13 @@ public class TipsRowView extends AbstractRowView {
         }
 
         a.recycle();
+    }
+
+    @Override
+    public void setHintMargin(int margin) {
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHint.getLayoutParams();
+        params.topMargin = margin;
+        viewHint.setLayoutParams(params);
     }
 
     public void setTipsColor1(int color) {
