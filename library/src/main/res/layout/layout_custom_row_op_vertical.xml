@@ -49,7 +49,7 @@
             android:id="@+id/layout_custom_row_v_view_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" >
+            android:layout_marginTop="2dp" >
 
             <TextView
                 android:id="@+id/layout_custom_row_v_hint_tips"
