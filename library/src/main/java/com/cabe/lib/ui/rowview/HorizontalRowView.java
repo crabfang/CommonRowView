@@ -47,6 +47,16 @@ public class HorizontalRowView extends AbstractRowView {
     }
 
     @Override
+    protected int getTitleDefaultGravity() {
+        return Gravity.Right.getVal();
+    }
+
+    @Override
+    protected int getHintDefaultGravity() {
+        return Gravity.Right.getVal();
+    }
+
+    @Override
     public void setHintMargin(int margin) {
         RelativeLayout.LayoutParams params = (LayoutParams) viewHint.getLayoutParams();
         params.leftMargin = margin;

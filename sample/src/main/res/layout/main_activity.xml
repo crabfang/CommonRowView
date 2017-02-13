@@ -25,6 +25,7 @@
     <com.cabe.lib.ui.rowview.VerticalRowView
         android:id="@+id/frag_me_row_bank_v"
         style="@style/RowViewStyle.V"
+        app:rv_hintGravity="Left"
         app:rv_title="Vertical Title"
         app:rv_titleDrawablePadding="5dp"
         app:rv_titleDrawable="@drawable/rp_icon_me_card"

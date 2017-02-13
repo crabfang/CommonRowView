@@ -12,6 +12,11 @@
         <attr name="rv_hintColor" format="color|reference" />
         <attr name="rv_hintTips" format="string|reference" />
         <attr name="rv_hintMargin" format="dimension|reference" />
+        <attr name="rv_hintGravity">
+            <enum name="Left" value="1" />
+            <enum name="Center" value="2" />
+            <enum name="Right" value="3" />
+        </attr>
         <attr name="rv_tipsSize_1" format="dimension|reference" />
         <attr name="rv_tipsColor_1" format="color|reference" />
         <attr name="rv_tips_1" format="string|reference" />

@@ -24,3 +24,5 @@ dependencies {
 
 apply from: '../maven.gradle'
 apply from: '../bintray.gradle'
+//apply from: 'https://raw.githubusercontent.com/crabfang/BintrayGradle/master/maven.gradle'
+//apply from: 'https://raw.githubusercontent.com/crabfang/BintrayGradle/master/bintray.gradle'

@@ -69,6 +69,8 @@ public abstract class AbstractRowView extends RelativeLayout {
     }
 
     protected abstract void initView(Context context);
+    protected abstract int getTitleDefaultGravity();
+    protected abstract int getHintDefaultGravity();
 
     protected void initAttr(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LayoutRowViewNormal, defStyleAttr, defStyleRes);
@@ -110,6 +112,11 @@ public abstract class AbstractRowView extends RelativeLayout {
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintMargin)) {
             int hintMargin = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_hintMargin, 0);
             setHintMargin(hintMargin);
+        }
+
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintGravity)) {
+            int attrVal = a.getInt(R.styleable.LayoutRowViewNormal_rv_hintGravity, getHintDefaultGravity());
+            setHintGravity(Gravity.create(attrVal));
         }
 
         showOption(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showRight, true));
@@ -194,6 +201,24 @@ public abstract class AbstractRowView extends RelativeLayout {
         if(rvHint == null) return;
 
         rvHint.setTextColor(color);
+    }
+
+    public void setHintGravity(Gravity gravity) {
+        if(viewHint == null) return;
+
+        int gravityVal = android.view.Gravity.LEFT;
+        switch(gravity) {
+            case Left:
+                gravityVal = android.view.Gravity.LEFT;
+                break;
+            case Center:
+                gravityVal = android.view.Gravity.CENTER_HORIZONTAL;
+                break;
+            case Right:
+                gravityVal = android.view.Gravity.RIGHT;
+                break;
+        }
+        viewHint.setGravity(gravityVal);
     }
 
     public void setIconPadding(int padding) {
@@ -290,5 +315,35 @@ public abstract class AbstractRowView extends RelativeLayout {
 
     public ImageView getImageOP() {
         return rvOption;
+    }
+
+    public enum Gravity {
+        Left(1), Center(2), Right(3);
+
+        int val = 1;
+        Gravity(int val) {
+            this.val = val;
+        }
+
+        public int getVal() {
+            return val;
+        }
+
+        public static Gravity create(int val) {
+            Gravity gravity;
+            switch(val) {
+                default:
+                case 1:
+                    gravity = Left;
+                    break;
+                case 2:
+                    gravity = Center;
+                    break;
+                case 3:
+                    gravity = Right;
+                    break;
+            }
+            return gravity;
+        }
     }
 }

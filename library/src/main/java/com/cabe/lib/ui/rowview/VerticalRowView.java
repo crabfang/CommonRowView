@@ -53,4 +53,14 @@ public class VerticalRowView extends AbstractRowView {
         params.topMargin = margin;
         viewHint.setLayoutParams(params);
     }
+
+    @Override
+    protected int getTitleDefaultGravity() {
+        return Gravity.Left.getVal();
+    }
+
+    @Override
+    protected int getHintDefaultGravity() {
+        return Gravity.Left.getVal();
+    }
 }

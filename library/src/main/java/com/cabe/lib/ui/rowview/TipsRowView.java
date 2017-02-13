@@ -142,4 +142,14 @@ public class TipsRowView extends AbstractRowView {
 
         viewTips.setVisibility(show ? View.VISIBLE : View.GONE);
     }
+
+    @Override
+    protected int getTitleDefaultGravity() {
+        return Gravity.Left.getVal();
+    }
+
+    @Override
+    protected int getHintDefaultGravity() {
+        return Gravity.Left.getVal();
+    }
 }
