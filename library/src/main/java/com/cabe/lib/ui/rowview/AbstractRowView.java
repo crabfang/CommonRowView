@@ -82,6 +82,11 @@ public abstract class AbstractRowView extends RelativeLayout {
             setIconPadding(0);
         }
 
+        int defaultWidth = LayoutParams.WRAP_CONTENT;
+        int iconWidth = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawableWidth, defaultWidth);
+        int iconHeight = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawableHeight, defaultWidth);
+        setIconSize(iconWidth, iconHeight);
+
         setTitleSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleSize, DEFAULT_TITLE_SIZE));
         setTitleColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_titleColor, DEFAULT_TITLE_COLOR));
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_title)) {
@@ -226,6 +231,15 @@ public abstract class AbstractRowView extends RelativeLayout {
 
         RelativeLayout.LayoutParams params = (LayoutParams) rvIcon.getLayoutParams();
         params.rightMargin = padding;
+        rvIcon.setLayoutParams(params);
+    }
+
+    public void setIconSize(int width, int height) {
+        if(rvIcon == null) return;
+
+        RelativeLayout.LayoutParams params = (LayoutParams) rvIcon.getLayoutParams();
+        params.width = width;
+        params.height = height;
         rvIcon.setLayoutParams(params);
     }
 
