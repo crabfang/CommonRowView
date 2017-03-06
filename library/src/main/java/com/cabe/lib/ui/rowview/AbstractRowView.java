@@ -295,9 +295,9 @@ public abstract class AbstractRowView extends RelativeLayout {
     }
 
     public void showOption(boolean show) {
-        if(rvOption == null) return;
+        if(viewOption == null) return;
 
-        rvOption.setVisibility(show ? View.VISIBLE : View.GONE);
+        viewOption.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     public void showPoint(boolean show) {
