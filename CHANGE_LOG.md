@@ -29,3 +29,6 @@ v1.3.4 2017-02-27
 ------------------
 1、新增rv_titleDrawableWidth、rv_titleDrawableHeight属性
 
+v1.4.0 2017-03-06
+------------------
+1、新增rv_hintLayout属性

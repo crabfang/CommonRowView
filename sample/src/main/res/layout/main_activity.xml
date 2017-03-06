@@ -14,6 +14,7 @@
         app:rv_titleDrawable="@drawable/rp_icon_me_card"
         app:rv_showHint="true"
         app:rv_hintTips="Horizontal Hint"
+        app:rv_hintLayout="@layout/inner_hint_layout"
         android:tag="Horizontal Tag"
         android:onClick="onClick" />
 

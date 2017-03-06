@@ -9,6 +9,7 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -77,9 +78,12 @@ public abstract class AbstractRowView extends RelativeLayout {
 
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleDrawable)) {
             setIcon(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_titleDrawable));
-            setIconPadding((int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding, DEFAULT_ICON_PADDING));
         } else {
-            setIconPadding(0);
+            setIcon(0);
+        }
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding)) {
+            setIconPadding((int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding, DEFAULT_ICON_PADDING));
+            rvIcon.setVisibility(View.VISIBLE);
         }
 
         int defaultWidth = LayoutParams.WRAP_CONTENT;
@@ -122,6 +126,13 @@ public abstract class AbstractRowView extends RelativeLayout {
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintGravity)) {
             int attrVal = a.getInt(R.styleable.LayoutRowViewNormal_rv_hintGravity, getHintDefaultGravity());
             setHintGravity(Gravity.create(attrVal));
+        }
+
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintLayout)) {
+            int resId = a.getResourceId(R.styleable.LayoutRowViewNormal_rv_hintLayout, 0);
+            if(resId > 0) {
+                replaceHint(resId);
+            }
         }
 
         showOption(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showRight, true));
@@ -293,6 +304,20 @@ public abstract class AbstractRowView extends RelativeLayout {
         if(rvFlag == null) return;
 
         rvFlag.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    public void replaceHint(int resId) {
+        if(viewHint != null && resId > 0) {
+            View viewInner = LayoutInflater.from(getContext()).inflate(resId, viewHint, false);
+            replaceHint(viewInner);
+        }
+    }
+
+    public void replaceHint(View viewInner) {
+        if(viewHint != null && viewInner != null) {
+            viewHint.removeAllViews();
+            viewHint.addView(viewInner);
+        }
     }
 
     public String getTitle() {

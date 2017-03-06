@@ -19,6 +19,7 @@
             <enum name="Center" value="2" />
             <enum name="Right" value="3" />
         </attr>
+        <attr name="rv_hintLayout" format="reference" />
         <attr name="rv_tipsSize_1" format="dimension|reference" />
         <attr name="rv_tipsColor_1" format="color|reference" />
         <attr name="rv_tips_1" format="string|reference" />
