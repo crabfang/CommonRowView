@@ -31,6 +31,12 @@
         <attr name="rv_showHint" format="boolean" />
         <attr name="rv_showRight" format="boolean" />
         <attr name="rv_showPoint" format="boolean" />
+        <attr name="rv_hintMaxLines" format="integer" />
+        <attr name="rv_hintEllipsize">
+            <enum name="Start" value="1" />
+            <enum name="Middle" value="2" />
+            <enum name="End" value="3" />
+        </attr>
     </declare-styleable>
 
 </resources>

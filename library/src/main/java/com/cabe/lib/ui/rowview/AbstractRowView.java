@@ -107,6 +107,15 @@ public abstract class AbstractRowView extends RelativeLayout {
         } else {
             setHint("");
         }
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintMaxLines)) {
+            int maxLines = a.getInt(R.styleable.LayoutRowViewNormal_rv_hintMaxLines, 1);
+            setHintMaxLines(maxLines);
+        }
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintEllipsize)) {
+            int val = a.getInt(R.styleable.LayoutRowViewNormal_rv_hintEllipsize, 3);
+            Ellipsize ellipsize = Ellipsize.create(val);
+            setHintEllipsize(ellipsize);
+        }
 
         int optionPadding = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_optionPadding, DEFAULT_OPTION_PADDING);
         setOptionPadding(optionPadding);
@@ -280,6 +289,31 @@ public abstract class AbstractRowView extends RelativeLayout {
         rvOption.setImageResource(resId);
     }
 
+    public void setHintMaxLines(int maxLines) {
+        if(rvHint == null || maxLines <= 0) return;
+
+        rvHint.setSingleLine(false);
+        rvHint.setMaxLines(maxLines);
+    }
+
+    public void setHintEllipsize(Ellipsize ellipsize) {
+        if(rvHint == null || ellipsize == null) return;
+
+        TextUtils.TruncateAt truncateAt;
+        switch (ellipsize) {
+            case Start:
+                truncateAt = TextUtils.TruncateAt.START;
+                break;
+            case Middle:
+                truncateAt = TextUtils.TruncateAt.MIDDLE;
+                break;
+            default:
+                truncateAt = TextUtils.TruncateAt.END;
+                break;
+        }
+        rvHint.setEllipsize(truncateAt);
+    }
+
     public abstract void setHintMargin(int margin);
 
     public void showHead(boolean show) {
@@ -383,6 +417,36 @@ public abstract class AbstractRowView extends RelativeLayout {
                     break;
             }
             return gravity;
+        }
+    }
+
+    private enum Ellipsize {
+        Start(1), Middle(2), End(3);
+
+        int val = 1;
+        Ellipsize(int val) {
+            this.val = val;
+        }
+
+        public int getVal() {
+            return val;
+        }
+
+        public static Ellipsize create(int val) {
+            Ellipsize ellipsize;
+            switch(val) {
+                default:
+                case 1:
+                    ellipsize = Start;
+                    break;
+                case 2:
+                    ellipsize = Middle;
+                    break;
+                case 3:
+                    ellipsize = End;
+                    break;
+            }
+            return ellipsize;
         }
     }
 }
