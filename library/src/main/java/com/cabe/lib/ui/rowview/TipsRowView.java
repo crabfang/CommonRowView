@@ -44,7 +44,7 @@ public class TipsRowView extends AbstractRowView {
     }
 
     @Override
-        protected void initView(Context context) {
+    protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_tips, this);
         viewTitle = findViewById(R.id.layout_custom_row_t_view_title);
         viewHint = (RelativeLayout) findViewById(R.id.layout_custom_row_t_view_hint);
