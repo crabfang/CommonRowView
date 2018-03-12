@@ -5,15 +5,25 @@ android {
     buildToolsVersion '23.0.3'
 
     defaultConfig {
-        applicationId "com.cabe.lib.ui.rowview.demo"
+        applicationId "com.enniu.demo"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs {
+        enniu {
+            storeFile file("51zhangdan.keystore")
+            keyAlias "51zhangdan.keystore"
+            keyPassword "69fcwireless"
+            storePassword "69fcwireless"
+        }
+
+    }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            signingConfig signingConfigs.enniu
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
