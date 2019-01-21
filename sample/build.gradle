@@ -12,18 +12,18 @@ android {
         versionName "1.0"
     }
     signingConfigs {
-        enniu {
-            storeFile file("51zhangdan.keystore")
-            keyAlias "51zhangdan.keystore"
-            keyPassword "69fcwireless"
-            storePassword "69fcwireless"
+        cabe {
+            storeFile file("cabe.keystore")
+            keyAlias "cabe"
+            keyPassword "19871010"
+            storePassword "19871010"
         }
 
     }
     buildTypes {
         release {
             minifyEnabled true
-            signingConfig signingConfigs.enniu
+            signingConfig signingConfigs.cabe
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
