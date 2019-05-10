@@ -100,13 +100,5 @@
             tools:text="@string/app_name" />
 
     </LinearLayout>
-    
-    <View android:id="@+id/layout_custom_row_view_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:background="#EEEEEE" />
 
 </RelativeLayout>

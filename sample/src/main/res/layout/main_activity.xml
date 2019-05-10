@@ -17,6 +17,7 @@
         app:rv_showDivider="true"
         app:rv_dividerMarginLeft="16dp"
         app:rv_dividerSize="1dp"
+        app:rv_dividerColor="#00FFFF"
         android:tag="Horizontal Tag"
         android:onClick="onClick" />
 

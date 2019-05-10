@@ -4,6 +4,8 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.TextUtils;
@@ -28,7 +30,6 @@ public abstract class AbstractRowView extends RelativeLayout {
     protected ImageView rvFlag;
     protected TextView rvHint;
     protected ImageView rvOption;
-    protected View rvDivider;
 
     protected int DEFAULT_ICON_PADDING = 0;
     protected int DEFAULT_OPTION_PADDING = 0;
@@ -36,6 +37,13 @@ public abstract class AbstractRowView extends RelativeLayout {
     protected int DEFAULT_TITLE_COLOR = 0xFF666666;
     protected int DEFAULT_HINT_SIZE = 0;
     protected int DEFAULT_HINT_COLOR = 0xFF999999;
+
+    private boolean showDivider = false;
+    private DividerPosition dividerPosition;
+    private int dividerColor = 0xFF333333;
+    private int dividerSize = 1;
+    private int dividerMarginLeft = 0;
+    private int dividerMarginRight = 0;
 
     public AbstractRowView(Context context) {
         this(context, null);
@@ -50,7 +58,6 @@ public abstract class AbstractRowView extends RelativeLayout {
 
         initDefaultConfig(context);
         initView(context);
-        rvDivider = findViewById(R.id.layout_custom_row_view_divider);
         initAttr(context, attrs, defStyleAttr, 0);
     }
 
@@ -60,7 +67,6 @@ public abstract class AbstractRowView extends RelativeLayout {
 
         initDefaultConfig(context);
         initView(context);
-        rvDivider = findViewById(R.id.layout_custom_row_view_divider);
         initAttr(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -147,42 +153,54 @@ public abstract class AbstractRowView extends RelativeLayout {
             }
         }
 
+        showDivider = a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showDivider, false);
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_dividerPosition)) {
             int attrVal = a.getInt(R.styleable.LayoutRowViewNormal_rv_dividerPosition, DividerPosition.Bottom.getVal());
-            setDividerPosition(DividerPosition.create(attrVal));
+            dividerPosition = DividerPosition.create(attrVal);
         }
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_dividerSize)) {
-            int dividerSize = a.getDimensionPixelOffset(R.styleable.LayoutRowViewNormal_rv_dividerSize, 0);
-            if(rvDivider != null) {
-                LayoutParams params = (LayoutParams) rvDivider.getLayoutParams();
-                params.height = dividerSize;
-                rvDivider.setLayoutParams(params);
-            }
+            dividerSize = a.getDimensionPixelOffset(R.styleable.LayoutRowViewNormal_rv_dividerSize, 0);
         }
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_dividerColor)) {
-            int dividerColor = a.getColor(R.styleable.LayoutRowViewNormal_rv_dividerColor, 0xFF333333);
-            if(rvDivider != null) {
-                rvDivider.setBackgroundColor(dividerColor);
-            }
+            dividerColor = a.getColor(R.styleable.LayoutRowViewNormal_rv_dividerColor, 0xFF333333);
         }
-        int dividerMarginLeft = -1;
-        int dividerMarginRight = -1;
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_dividerMarginLeft)) {
             dividerMarginLeft = a.getDimensionPixelOffset(R.styleable.LayoutRowViewNormal_rv_dividerMarginLeft, -1);
         }
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_dividerMarginRight)) {
             dividerMarginRight = a.getDimensionPixelOffset(R.styleable.LayoutRowViewNormal_rv_dividerMarginRight, -1);
         }
-        setDividerMargin(dividerMarginLeft, dividerMarginRight);
 
         showOption(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showRight, true));
         showHint(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showHint, false));
         showPoint(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showPoint, false));
-        showDivider(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showDivider, false));
 
         a.recycle();
 
         showHead(true);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        drawDivider(canvas);
+    }
+
+    private void drawDivider(Canvas canvas) {
+        if(showDivider) {
+            int width = getMeasuredWidth();
+            int height = getMeasuredHeight();
+            if(height == 0) return;
+
+            Paint paintDivider = new Paint();
+            paintDivider.setColor(dividerColor);
+            paintDivider.setStrokeWidth(dividerSize);
+            float startX = dividerMarginLeft;
+            float startY = dividerPosition == DividerPosition.Top ? 0 : height - dividerSize;
+            float stopX = width - dividerMarginRight;
+            float stopY = dividerPosition == DividerPosition.Top ? 0 : height - dividerSize;
+            canvas.drawLine(startX, startY, stopX, stopY, paintDivider);
+        }
     }
 
     public void setTitle(int titleRes) {
@@ -348,31 +366,6 @@ public abstract class AbstractRowView extends RelativeLayout {
 
     public abstract void setHintMargin(int margin);
 
-    public void setDividerPosition(DividerPosition position) {
-        if(rvDivider == null) return;
-
-        RelativeLayout.LayoutParams params = (LayoutParams) rvDivider.getLayoutParams();
-        if(position == DividerPosition.Top) {
-            params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        } else {
-            params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        }
-        rvDivider.setLayoutParams(params);
-    }
-
-    public void setDividerMargin(int marginLeft, int marginRight) {
-        if(rvDivider == null) return;
-
-        RelativeLayout.LayoutParams params = (LayoutParams) rvDivider.getLayoutParams();
-        if(marginLeft != -1) {
-            params.leftMargin = marginLeft;
-        }
-        if(marginRight != -1) {
-            params.rightMargin = marginRight;
-        }
-        rvDivider.setLayoutParams(params);
-    }
-
     public void showHead(boolean show) {
         if(viewTitle == null) return;
 
@@ -395,12 +388,6 @@ public abstract class AbstractRowView extends RelativeLayout {
         if(rvFlag == null) return;
 
         rvFlag.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    public void showDivider(boolean show) {
-        if(rvDivider == null) return;
-
-        rvDivider.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     public void replaceHint(int resId) {
@@ -451,10 +438,6 @@ public abstract class AbstractRowView extends RelativeLayout {
 
     public ImageView getImageOP() {
         return rvOption;
-    }
-
-    public View getDivider() {
-        return rvDivider;
     }
 
     public enum Gravity {
