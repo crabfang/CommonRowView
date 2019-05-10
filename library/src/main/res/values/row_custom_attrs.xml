@@ -39,6 +39,7 @@
         </attr>
         <attr name="rv_showDivider" format="boolean" />
         <attr name="rv_dividerSize" format="dimension|reference" />
+        <attr name="rv_dividerColor" format="color|reference" />
         <attr name="rv_dividerMarginLeft" format="dimension|reference" />
         <attr name="rv_dividerMarginRight" format="dimension|reference" />
         <attr name="rv_dividerPosition">

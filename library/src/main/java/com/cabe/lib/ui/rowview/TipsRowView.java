@@ -9,9 +9,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -47,16 +45,16 @@ public class TipsRowView extends AbstractRowView {
     protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_tips, this);
         viewTitle = findViewById(R.id.layout_custom_row_t_view_title);
-        viewHint = (RelativeLayout) findViewById(R.id.layout_custom_row_t_view_hint);
+        viewHint = findViewById(R.id.layout_custom_row_t_view_hint);
 
-        rvIcon = (ImageView) findViewById(R.id.layout_custom_row_t_icon);
-        rvTitle = (TextView) findViewById(R.id.layout_custom_row_t_head_title);
-        rvFlag = (ImageView) findViewById(R.id.layout_custom_row_t_head_point);
-        rvHint = (TextView) findViewById(R.id.layout_custom_row_t_hint_tips);
+        rvIcon = findViewById(R.id.layout_custom_row_t_icon);
+        rvTitle = findViewById(R.id.layout_custom_row_t_head_title);
+        rvFlag = findViewById(R.id.layout_custom_row_t_head_point);
+        rvHint = findViewById(R.id.layout_custom_row_t_hint_tips);
 
         viewTips = findViewById(R.id.layout_custom_row_t_view_tips);
-        rvTips1 = (TextView) findViewById(R.id.layout_custom_row_t_tips_info);
-        rvTips2 = (TextView) findViewById(R.id.layout_custom_row_t_tips_info_second);
+        rvTips1 = findViewById(R.id.layout_custom_row_t_tips_info);
+        rvTips2 = findViewById(R.id.layout_custom_row_t_tips_info_second);
     }
 
     @Override

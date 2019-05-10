@@ -5,9 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 /**
  * 水平布局的操作栏
@@ -36,14 +34,14 @@ public class HorizontalRowView extends AbstractRowView {
     protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_horizontal, this);
         viewTitle = findViewById(R.id.layout_custom_row_h_view_title);
-        viewHint = (RelativeLayout) findViewById(R.id.layout_custom_row_h_view_hint);
-        viewOption = (RelativeLayout) findViewById(R.id.layout_custom_row_h_view_option);
+        viewHint = findViewById(R.id.layout_custom_row_h_view_hint);
+        viewOption = findViewById(R.id.layout_custom_row_h_view_option);
 
-        rvIcon = (ImageView) findViewById(R.id.layout_custom_row_h_icon);
-        rvTitle = (TextView) findViewById(R.id.layout_custom_row_h_head_title);
-        rvFlag = (ImageView) findViewById(R.id.layout_custom_row_h_head_point);
-        rvHint = (TextView) findViewById(R.id.layout_custom_row_h_hint_tips);
-        rvOption = (ImageView) findViewById(R.id.layout_custom_row_h_op_arrow);
+        rvIcon = findViewById(R.id.layout_custom_row_h_icon);
+        rvTitle = findViewById(R.id.layout_custom_row_h_head_title);
+        rvFlag = findViewById(R.id.layout_custom_row_h_head_point);
+        rvHint = findViewById(R.id.layout_custom_row_h_hint_tips);
+        rvOption = findViewById(R.id.layout_custom_row_h_op_arrow);
     }
 
     @Override

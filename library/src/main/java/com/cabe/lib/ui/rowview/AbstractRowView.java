@@ -50,6 +50,7 @@ public abstract class AbstractRowView extends RelativeLayout {
 
         initDefaultConfig(context);
         initView(context);
+        rvDivider = findViewById(R.id.layout_custom_row_view_divider);
         initAttr(context, attrs, defStyleAttr, 0);
     }
 
@@ -151,20 +152,26 @@ public abstract class AbstractRowView extends RelativeLayout {
             setDividerPosition(DividerPosition.create(attrVal));
         }
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_dividerSize)) {
-            int dividerSize = a.getInt(R.styleable.LayoutRowViewNormal_rv_dividerSize, 0);
+            int dividerSize = a.getDimensionPixelOffset(R.styleable.LayoutRowViewNormal_rv_dividerSize, 0);
             if(rvDivider != null) {
                 LayoutParams params = (LayoutParams) rvDivider.getLayoutParams();
                 params.height = dividerSize;
                 rvDivider.setLayoutParams(params);
             }
         }
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_dividerColor)) {
+            int dividerColor = a.getColor(R.styleable.LayoutRowViewNormal_rv_dividerColor, 0xFF333333);
+            if(rvDivider != null) {
+                rvDivider.setBackgroundColor(dividerColor);
+            }
+        }
         int dividerMarginLeft = -1;
         int dividerMarginRight = -1;
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_dividerMarginLeft)) {
-            dividerMarginLeft = a.getInt(R.styleable.LayoutRowViewNormal_rv_dividerMarginLeft, -1);
+            dividerMarginLeft = a.getDimensionPixelOffset(R.styleable.LayoutRowViewNormal_rv_dividerMarginLeft, -1);
         }
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_dividerMarginRight)) {
-            dividerMarginRight = a.getInt(R.styleable.LayoutRowViewNormal_rv_dividerMarginRight, -1);
+            dividerMarginRight = a.getDimensionPixelOffset(R.styleable.LayoutRowViewNormal_rv_dividerMarginRight, -1);
         }
         setDividerMargin(dividerMarginLeft, dividerMarginRight);
 
