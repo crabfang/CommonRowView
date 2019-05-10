@@ -37,6 +37,14 @@
             <enum name="Middle" value="2" />
             <enum name="End" value="3" />
         </attr>
+        <attr name="rv_showDivider" format="boolean" />
+        <attr name="rv_dividerSize" format="dimension|reference" />
+        <attr name="rv_dividerMarginLeft" format="dimension|reference" />
+        <attr name="rv_dividerMarginRight" format="dimension|reference" />
+        <attr name="rv_dividerPosition">
+            <enum name="Top" value="1" />
+            <enum name="Bottom" value="2" />
+        </attr>
     </declare-styleable>
 
 </resources>

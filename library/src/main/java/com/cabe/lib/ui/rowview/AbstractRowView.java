@@ -28,6 +28,7 @@ public abstract class AbstractRowView extends RelativeLayout {
     protected ImageView rvFlag;
     protected TextView rvHint;
     protected ImageView rvOption;
+    protected View rvDivider;
 
     protected int DEFAULT_ICON_PADDING = 0;
     protected int DEFAULT_OPTION_PADDING = 0;
@@ -58,6 +59,7 @@ public abstract class AbstractRowView extends RelativeLayout {
 
         initDefaultConfig(context);
         initView(context);
+        rvDivider = findViewById(R.id.layout_custom_row_view_divider);
         initAttr(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -144,9 +146,32 @@ public abstract class AbstractRowView extends RelativeLayout {
             }
         }
 
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_dividerPosition)) {
+            int attrVal = a.getInt(R.styleable.LayoutRowViewNormal_rv_dividerPosition, DividerPosition.Bottom.getVal());
+            setDividerPosition(DividerPosition.create(attrVal));
+        }
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_dividerSize)) {
+            int dividerSize = a.getInt(R.styleable.LayoutRowViewNormal_rv_dividerSize, 0);
+            if(rvDivider != null) {
+                LayoutParams params = (LayoutParams) rvDivider.getLayoutParams();
+                params.height = dividerSize;
+                rvDivider.setLayoutParams(params);
+            }
+        }
+        int dividerMarginLeft = -1;
+        int dividerMarginRight = -1;
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_dividerMarginLeft)) {
+            dividerMarginLeft = a.getInt(R.styleable.LayoutRowViewNormal_rv_dividerMarginLeft, -1);
+        }
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_dividerMarginRight)) {
+            dividerMarginRight = a.getInt(R.styleable.LayoutRowViewNormal_rv_dividerMarginRight, -1);
+        }
+        setDividerMargin(dividerMarginLeft, dividerMarginRight);
+
         showOption(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showRight, true));
         showHint(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showHint, false));
         showPoint(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showPoint, false));
+        showDivider(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showDivider, false));
 
         a.recycle();
 
@@ -316,6 +341,31 @@ public abstract class AbstractRowView extends RelativeLayout {
 
     public abstract void setHintMargin(int margin);
 
+    public void setDividerPosition(DividerPosition position) {
+        if(rvDivider == null) return;
+
+        RelativeLayout.LayoutParams params = (LayoutParams) rvDivider.getLayoutParams();
+        if(position == DividerPosition.Top) {
+            params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        } else {
+            params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        }
+        rvDivider.setLayoutParams(params);
+    }
+
+    public void setDividerMargin(int marginLeft, int marginRight) {
+        if(rvDivider == null) return;
+
+        RelativeLayout.LayoutParams params = (LayoutParams) rvDivider.getLayoutParams();
+        if(marginLeft != -1) {
+            params.leftMargin = marginLeft;
+        }
+        if(marginRight != -1) {
+            params.rightMargin = marginRight;
+        }
+        rvDivider.setLayoutParams(params);
+    }
+
     public void showHead(boolean show) {
         if(viewTitle == null) return;
 
@@ -338,6 +388,12 @@ public abstract class AbstractRowView extends RelativeLayout {
         if(rvFlag == null) return;
 
         rvFlag.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    public void showDivider(boolean show) {
+        if(rvDivider == null) return;
+
+        rvDivider.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     public void replaceHint(int resId) {
@@ -390,6 +446,10 @@ public abstract class AbstractRowView extends RelativeLayout {
         return rvOption;
     }
 
+    public View getDivider() {
+        return rvDivider;
+    }
+
     public enum Gravity {
         Left(1), Center(2), Right(3);
 
@@ -417,6 +477,33 @@ public abstract class AbstractRowView extends RelativeLayout {
                     break;
             }
             return gravity;
+        }
+    }
+
+    public enum DividerPosition {
+        Top(1), Bottom(2);
+
+        int val = 2;
+        DividerPosition(int val) {
+            this.val = val;
+        }
+
+        public int getVal() {
+            return val;
+        }
+
+        public static DividerPosition create(int val) {
+            DividerPosition position;
+            switch (val) {
+                case 1:
+                    position = Top;
+                    break;
+                default:
+                case 2:
+                    position = Bottom;
+                    break;
+            }
+            return position;
         }
     }
 
