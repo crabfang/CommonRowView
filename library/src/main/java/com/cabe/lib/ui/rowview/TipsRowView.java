@@ -20,7 +20,7 @@ public class TipsRowView extends AbstractRowView {
     private final static int DEFAULT_TIPS_SIZE = 12;
     private final static int DEFAULT_TIPS_COLOR = 0xFF999999;
 
-    private View viewTips;
+    private LinearLayout viewTips;
     private TextView rvTips1;
     private TextView rvTips2;
 
@@ -139,6 +139,13 @@ public class TipsRowView extends AbstractRowView {
         if(viewTips == null) return;
 
         viewTips.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    public void replaceHint(View viewInner) {
+        if(viewTips != null && viewInner != null) {
+            viewTips.removeAllViews();
+            viewTips.addView(viewInner);
+        }
     }
 
     @Override

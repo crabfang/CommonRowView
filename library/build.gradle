@@ -1,14 +1,18 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion COMPILE_SDK_VERSION as int
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 23
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
         versionCode 1
-        versionName "1.0"
+        versionName PROJ_VERSION
+        consumerProguardFiles 'proguard-rules.pro'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
         release {
@@ -19,10 +23,23 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-apply from: '../maven.gradle'
-apply from: '../bintray.gradle'
-//apply from: 'https://raw.githubusercontent.com/crabfang/BintrayGradle/master/maven.gradle'
-//apply from: 'https://raw.githubusercontent.com/crabfang/BintrayGradle/master/bintray.gradle'
+apply plugin: 'com.novoda.bintray-release'
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+publish {
+    groupId PROJ_GROUP
+    artifactId PROJ_ARTIFACT
+    publishVersion PROJ_VERSION
+    userOrg = DEVELOPER_ID
+    uploadName = PROJ_NAME
+    desc = PROJ_DESC
+    website = PROJ_URL_LINK
+    issueTracker = PROJ_URL_ISSUE
+    repository = PROJ_URL_GIT
+    licences = ["Apache-2.0"]
+    bintrayUser = properties.getProperty("bintray.user")
+    bintrayKey = properties.getProperty("bintray.apikey")
+}
