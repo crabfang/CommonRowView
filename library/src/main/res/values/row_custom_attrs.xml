@@ -26,6 +26,7 @@
         <attr name="rv_tipsSize_2" format="dimension|reference" />
         <attr name="rv_tipsColor_2" format="color|reference" />
         <attr name="rv_tips_2" format="string|reference" />
+        <attr name="rv_tipsLayout" format="reference" />
         <attr name="rv_optionPadding" format="dimension|reference" />
         <attr name="rv_rightDrawable" format="reference" />
         <attr name="rv_showHint" format="boolean" />

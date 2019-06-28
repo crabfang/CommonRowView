@@ -82,6 +82,13 @@ public class TipsRowView extends AbstractRowView {
             setTipsValue2("");
         }
 
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_tipsLayout)) {
+            int resId = a.getResourceId(R.styleable.LayoutRowViewNormal_rv_tipsLayout, 0);
+            if(resId > 0) {
+                replaceTips(resId);
+            }
+        }
+
         a.recycle();
     }
 
@@ -141,11 +148,22 @@ public class TipsRowView extends AbstractRowView {
         viewTips.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
-    public void replaceHint(View viewInner) {
+    public void replaceTips(int resId) {
+        if(viewHint != null && resId > 0) {
+            View viewInner = LayoutInflater.from(getContext()).inflate(resId, viewHint, false);
+            replaceTips(viewInner);
+        }
+    }
+
+    public void replaceTips(View viewInner) {
         if(viewTips != null && viewInner != null) {
             viewTips.removeAllViews();
             viewTips.addView(viewInner);
         }
+    }
+
+    public LinearLayout getTipsView() {
+        return viewTips;
     }
 
     @Override
