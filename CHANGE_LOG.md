@@ -1,6 +1,6 @@
 change log
 ==========
-v1.5.2 2020-04-02
+v1.5.3 2020-04-02
 -----------------
 1、新增TitleLabelLayout控件
 2、完善AbstractRowView属性

@@ -109,6 +109,11 @@ public abstract class AbstractRowView extends RelativeLayout {
             setTitle("");
         }
 
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleGravity)) {
+            int attrVal = a.getInt(R.styleable.LayoutRowViewNormal_rv_titleGravity, getTitleDefaultGravity());
+            setTitleGravity(Gravity.create(attrVal));
+        }
+
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleFixedWidth)) {
             int fixedWidth = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleFixedWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
             setTitleWidth(fixedWidth);
@@ -281,6 +286,24 @@ public abstract class AbstractRowView extends RelativeLayout {
         if(rvTitle == null) return;
 
         rvTitle.setTextColor(color);
+    }
+
+    public void setTitleGravity(Gravity gravity) {
+        if(rvTitle == null) return;
+
+        int gravityVal = android.view.Gravity.LEFT;
+        switch(gravity) {
+            case Left:
+                gravityVal = android.view.Gravity.LEFT;
+                break;
+            case Center:
+                gravityVal = android.view.Gravity.CENTER_HORIZONTAL;
+                break;
+            case Right:
+                gravityVal = android.view.Gravity.RIGHT;
+                break;
+        }
+        rvTitle.setGravity(gravityVal);
     }
 
     public void setTitleWidth(int width) {
