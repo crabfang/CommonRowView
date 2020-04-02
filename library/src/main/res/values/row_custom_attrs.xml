@@ -9,6 +9,13 @@
         <attr name="rv_titleDrawablePadding" format="dimension|reference" />
         <attr name="rv_titleDrawableWidth" format="dimension|reference" />
         <attr name="rv_titleDrawableHeight" format="dimension|reference" />
+        <attr name="rv_titleFixedWidth" format="dimension|reference" />
+        <attr name="rv_titleMaxLines" format="integer" />
+        <attr name="rv_titleEllipsize">
+            <enum name="Start" value="1" />
+            <enum name="Middle" value="2" />
+            <enum name="End" value="3" />
+        </attr>
         <attr name="rv_pointDrawable" format="reference" />
         <attr name="rv_hintSize" format="dimension|reference" />
         <attr name="rv_hintColor" format="color|reference" />

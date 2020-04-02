@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -106,6 +107,22 @@ public abstract class AbstractRowView extends RelativeLayout {
             setTitle(a.getText(R.styleable.LayoutRowViewNormal_rv_title));
         } else {
             setTitle("");
+        }
+
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleFixedWidth)) {
+            int fixedWidth = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleFixedWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
+            setTitleWidth(fixedWidth);
+        } else {
+            setTitleWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleMaxLines)) {
+            int maxLines = a.getInt(R.styleable.LayoutRowViewNormal_rv_titleMaxLines, 1);
+            setTitleMaxLines(maxLines);
+        }
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleEllipsize)) {
+            int val = a.getInt(R.styleable.LayoutRowViewNormal_rv_titleEllipsize, 3);
+            Ellipsize ellipsize = Ellipsize.create(val);
+            setTitleEllipsize(ellipsize);
         }
 
         setHint(0);
@@ -264,6 +281,39 @@ public abstract class AbstractRowView extends RelativeLayout {
         if(rvTitle == null) return;
 
         rvTitle.setTextColor(color);
+    }
+
+    public void setTitleWidth(int width) {
+        if(rvTitle == null) return;
+
+        ViewGroup.LayoutParams params = rvTitle.getLayoutParams();
+        params.width = width;
+        rvTitle.setLayoutParams(params);
+    }
+
+    public void setTitleMaxLines(int maxLines) {
+        if(rvTitle == null || maxLines <= 0) return;
+
+        rvTitle.setSingleLine(false);
+        rvTitle.setMaxLines(maxLines);
+    }
+
+    public void setTitleEllipsize(Ellipsize ellipsize) {
+        if(rvTitle == null || ellipsize == null) return;
+
+        TextUtils.TruncateAt truncateAt;
+        switch (ellipsize) {
+            case Start:
+                truncateAt = TextUtils.TruncateAt.START;
+                break;
+            case Middle:
+                truncateAt = TextUtils.TruncateAt.MIDDLE;
+                break;
+            default:
+                truncateAt = TextUtils.TruncateAt.END;
+                break;
+        }
+        rvTitle.setEllipsize(truncateAt);
     }
 
     public void setHintSize(int unit, float size) {
