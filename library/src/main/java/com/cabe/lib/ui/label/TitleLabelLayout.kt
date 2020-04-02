@@ -4,6 +4,7 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
+import android.text.TextUtils.TruncateAt
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
@@ -35,17 +36,24 @@ class TitleLabelLayout: LinearLayout {
 
             val titleSize = a?.getDimensionPixelSize(R.styleable.TitleLabelLayout_tl_titleSize, labelDefaultSize) ?: labelDefaultSize
             val titleColor = a?.getColor(R.styleable.TitleLabelLayout_tl_titleColor, labelDefaultColor) ?: labelDefaultColor
-            val titleGravity = a?.getInt(R.styleable.TitleLabelLayout_tl_titleGravity, LabelGravity.Center.gravity) ?: LabelGravity.Center.gravity
             val titleStr = a?.getString(R.styleable.TitleLabelLayout_tl_title)
+            val titleGravity = a?.getInt(R.styleable.TitleLabelLayout_tl_titleGravity, LabelGravity.Center.gravity) ?: LabelGravity.Center.gravity
             val titleMargin = a?.getDimensionPixelOffset(R.styleable.TitleLabelLayout_tl_titlePadding, 0) ?: 0
+            val titleWidth = a?.getDimensionPixelOffset(R.styleable.TitleLabelLayout_tl_titleFixedWidth, LayoutParams.WRAP_CONTENT) ?: LayoutParams.WRAP_CONTENT
+            val titleMaxLine = a?.getInteger(R.styleable.TitleLabelLayout_tl_titleMaxLines, 1) ?: 1
+            val titleEllipsize = a?.getInt(R.styleable.TitleLabelLayout_tl_titleEllipsize, Ellipsize.End.ellipsize) ?: Ellipsize.End.ellipsize
 
             labelView = TextView(context)
+            labelView.maxLines = titleMaxLine
+            labelView.ellipsize = Ellipsize.create(titleEllipsize).getTextEllipsize()
+            labelView.gravity = LabelGravity.create(titleGravity).getViewGravity()
             labelView.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize.toFloat())
             labelView.setTextColor(titleColor)
             labelView.text = titleStr
 
-            val labelParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-            labelParams.gravity = LabelGravity.create(titleGravity).getViewGravity()
+            val titleLayoutGravity = a?.getInt(R.styleable.TitleLabelLayout_tl_titleLayoutGravity, LabelGravity.Center.gravity) ?: LabelGravity.Center.gravity
+            val labelParams = LayoutParams(titleWidth, LayoutParams.WRAP_CONTENT)
+            labelParams.gravity = LabelGravity.create(titleLayoutGravity).getViewGravity()
             labelParams.rightMargin = titleMargin
             addView(labelView, 0, labelParams)
 
@@ -77,8 +85,8 @@ class TitleLabelLayout: LinearLayout {
     }
 }
 
-enum class LabelGravity(gravity: Int) {
-    Top(1), Center(2), Bottom(3);
+private enum class LabelGravity(gravity: Int) {
+    Top(1), Center(2), Bottom(3), Left(4), Right(5);
 
     var gravity = 1
     init {
@@ -89,6 +97,8 @@ enum class LabelGravity(gravity: Int) {
         return when(gravity) {
             Top.gravity -> Gravity.TOP
             Bottom.gravity -> Gravity.BOTTOM
+            Left.gravity -> Gravity.LEFT
+            Right.gravity -> Gravity.RIGHT
             else -> Gravity.CENTER
         }
     }
@@ -99,7 +109,37 @@ enum class LabelGravity(gravity: Int) {
                 1 -> Top
                 2 -> Center
                 3 -> Bottom
+                4 -> Left
+                5 -> Right
                 else -> Center
+            }
+        }
+    }
+}
+
+private enum class Ellipsize(ellipsize: Int) {
+    Start(1), Middle(2), End(3);
+
+    var ellipsize = 1
+    init {
+        this.ellipsize = ellipsize
+    }
+
+    fun getTextEllipsize(): TruncateAt {
+        return when (ellipsize) {
+            Start.ellipsize -> TruncateAt.START
+            Middle.ellipsize -> TruncateAt.MIDDLE
+            else -> TruncateAt.END
+        }
+    }
+
+    companion object {
+        fun create(ellipsize: Int): Ellipsize {
+            return when (ellipsize) {
+                1 -> Start
+                2 -> Middle
+                3 -> End
+                else -> Start
             }
         }
     }

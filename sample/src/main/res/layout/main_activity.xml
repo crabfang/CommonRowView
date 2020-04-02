@@ -10,12 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:gravity="center_vertical"
-        app:tl_title="app_name"
+        app:tl_title="app_nameapp_namenapp_nasdfsdffsdmeasdf"
         app:tl_titleColor="#333333"
         app:tl_titleSize="16dp"
         app:tl_titlePadding="20dp"
+        app:tl_titleMaxLines="2"
+        app:tl_titleEllipsize="End"
+        app:tl_titleFixedWidth="140dp"
         app:tl_titleGravity="Center"
+        app:tl_titleLayoutGravity="Center"
         app:tl_titleDrawable="@drawable/rp_icon_me_card"
         app:tl_titleDrawableWidth="40dp"
         app:tl_titleDrawableHeight="40dp"
@@ -23,7 +28,7 @@
         app:tl_titleDrawableGravity="Center" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:textColor="#FF0000" />
