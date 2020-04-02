@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
@@ -8,7 +11,7 @@ android {
         targetSdkVersion TARGET_SDK_VERSION as int
         versionCode 1
         versionName "1.0"
-        applicationId "com.enniu.demo"
+        applicationId "com.cabe.demo.row"
     }
     signingConfigs {
         cabe {
@@ -30,7 +33,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:25.1.0'
+    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
     implementation project(':library')
 //    implementation 'com.cabe.lib.ui:RowView:1.3.0'
 }

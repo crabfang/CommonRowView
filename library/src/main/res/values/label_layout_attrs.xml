@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TitleLabelLayout">
+        <attr name="tl_titleSize" format="dimension|reference" />
+        <attr name="tl_titleColor" format="color|reference" />
+        <attr name="tl_title" format="string|reference" />
+        <attr name="tl_titleGravity" format="enum">
+            <enum name="Top" value="1" />
+            <enum name="Center" value="2" />
+            <enum name="Bottom" value="3" />
+        </attr>
+        <attr name="tl_titlePadding" format="dimension|reference" />
+        <attr name="tl_titleDrawable" format="reference" />
+        <attr name="tl_titleDrawablePadding" format="dimension|reference" />
+        <attr name="tl_titleDrawableWidth" format="dimension|reference" />
+        <attr name="tl_titleDrawableHeight" format="dimension|reference" />
+        <attr name="tl_titleDrawableGravity" format="enum">
+            <enum name="Top" value="1" />
+            <enum name="Center" value="2" />
+            <enum name="Bottom" value="3" />
+        </attr>
+    </declare-styleable>
+
+</resources>
