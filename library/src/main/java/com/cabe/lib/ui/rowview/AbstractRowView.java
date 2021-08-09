@@ -307,11 +307,11 @@ public abstract class AbstractRowView extends RelativeLayout {
     }
 
     public void setTitleWidth(int width) {
-        if(rvTitle == null) return;
+        if(viewTitle == null) return;
 
-        ViewGroup.LayoutParams params = rvTitle.getLayoutParams();
+        ViewGroup.LayoutParams params = viewTitle.getLayoutParams();
         params.width = width;
-        rvTitle.setLayoutParams(params);
+        viewTitle.setLayoutParams(params);
     }
 
     public void setTitleMaxLines(int maxLines) {
