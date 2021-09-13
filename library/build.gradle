@@ -30,21 +30,3 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:1.1.3"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
-
-apply plugin: 'com.novoda.bintray-release'
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-publish {
-    groupId PROJ_GROUP
-    artifactId PROJ_ARTIFACT
-    publishVersion PROJ_VERSION
-    userOrg = DEVELOPER_ID
-    uploadName = PROJ_NAME
-    desc = PROJ_DESC
-    website = PROJ_URL_LINK
-    issueTracker = PROJ_URL_ISSUE
-    repository = PROJ_URL_GIT
-    licences = ["Apache-2.0"]
-    bintrayUser = properties.getProperty("bintray.user")
-    bintrayKey = properties.getProperty("bintray.apikey")
-}

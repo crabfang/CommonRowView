@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/layout_custom_row_v_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
-        android:contentDescription="@string/app_name" />
+        tools:src="@drawable/row_view_point_red"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/layout_custom_row_v_icon"
-        android:layout_toLeftOf="@+id/layout_custom_row_v_view_option"
         android:gravity="center_vertical"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        tools:layout_marginLeft="10dp"
+        tools:layout_marginRight="10dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintLeft_toRightOf="@+id/layout_custom_row_v_icon"
+        app:layout_constraintRight_toLeftOf="@+id/layout_custom_row_v_view_option"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" >
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/layout_custom_row_v_view_head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +45,12 @@
                 android:ellipsize="end"
                 android:textSize="16sp"
                 android:textColor="#666666"
-                tools:text="@string/app_name" />
+                tools:text="string_app_name"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/layout_custom_row_v_head_point"/>
 
             <ImageView
                 android:id="@+id/layout_custom_row_v_head_point"
@@ -43,13 +58,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
                 android:src="@drawable/row_view_point_red"
-                android:contentDescription="@string/app_name"/>
+                android:contentDescription="@string/app_name"
+                app:layout_constraintTop_toTopOf="@+id/layout_custom_row_v_head_title"
+                app:layout_constraintLeft_toRightOf="@+id/layout_custom_row_v_head_title"
+                app:layout_constraintRight_toRightOf="parent"/>
 
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
         <RelativeLayout
             android:id="@+id/layout_custom_row_v_view_hint"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp" >
 
@@ -61,7 +79,7 @@
                 android:ellipsize="end"
                 android:textSize="12sp"
                 android:textColor="#999999"
-                tools:text="@string/app_name" />
+                tools:text="string_app_namestring_app_namestring_app_namestring_app_namestring_app_name" />
 
         </RelativeLayout>
 
@@ -72,9 +90,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" >
 
         <ImageView
             android:id="@+id/layout_custom_row_v_op_arrow"
@@ -85,4 +104,4 @@
 
     </RelativeLayout>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -1,13 +1,13 @@
 package com.cabe.lib.ui.rowview;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
+import android.support.constraint.ConstraintLayout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -22,7 +22,7 @@ import android.widget.TextView;
  * 操作栏抽象类
  * Created by cabe on 16/3/28.
  */
-public abstract class AbstractRowView extends RelativeLayout {
+public abstract class AbstractRowView extends ConstraintLayout {
     protected View viewTitle;
     protected RelativeLayout viewHint;
     protected RelativeLayout viewOption;
@@ -59,16 +59,7 @@ public abstract class AbstractRowView extends RelativeLayout {
 
         initDefaultConfig(context);
         initView(context);
-        initAttr(context, attrs, defStyleAttr, 0);
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public AbstractRowView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-
-        initDefaultConfig(context);
-        initView(context);
-        initAttr(context, attrs, defStyleAttr, defStyleRes);
+        initAttr(context, attrs, defStyleAttr);
     }
 
     private void initDefaultConfig(Context context) {
@@ -83,8 +74,8 @@ public abstract class AbstractRowView extends RelativeLayout {
     protected abstract int getTitleDefaultGravity();
     protected abstract int getHintDefaultGravity();
 
-    protected void initAttr(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LayoutRowViewNormal, defStyleAttr, defStyleRes);
+    protected void initAttr(Context context, AttributeSet attrs, int defStyleAttr) {
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LayoutRowViewNormal, defStyleAttr, 0);
 
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleDrawable)) {
             setIcon(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_titleDrawable));
@@ -129,21 +120,25 @@ public abstract class AbstractRowView extends RelativeLayout {
             Ellipsize ellipsize = Ellipsize.create(val);
             setTitleEllipsize(ellipsize);
         }
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleStyle)) {
+            int val = a.getInt(R.styleable.LayoutRowViewNormal_rv_titleStyle, 1);
+            setTitleStyle(val);
+        }
 
         setHint(0);
-        setHintSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_hintSize, DEFAULT_HINT_SIZE));
-        setHintColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_hintColor, DEFAULT_HINT_COLOR));
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintTips)) {
-            setHint(a.getText(R.styleable.LayoutRowViewNormal_rv_hintTips));
+        setHintSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_labelSize, DEFAULT_HINT_SIZE));
+        setHintColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_labelColor, DEFAULT_HINT_COLOR));
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelValue)) {
+            setHint(a.getText(R.styleable.LayoutRowViewNormal_rv_labelValue));
         } else {
             setHint("");
         }
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintMaxLines)) {
-            int maxLines = a.getInt(R.styleable.LayoutRowViewNormal_rv_hintMaxLines, 1);
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelMaxLines)) {
+            int maxLines = a.getInt(R.styleable.LayoutRowViewNormal_rv_labelMaxLines, 1);
             setHintMaxLines(maxLines);
         }
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintEllipsize)) {
-            int val = a.getInt(R.styleable.LayoutRowViewNormal_rv_hintEllipsize, 3);
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelEllipsize)) {
+            int val = a.getInt(R.styleable.LayoutRowViewNormal_rv_labelEllipsize, 3);
             Ellipsize ellipsize = Ellipsize.create(val);
             setHintEllipsize(ellipsize);
         }
@@ -158,18 +153,18 @@ public abstract class AbstractRowView extends RelativeLayout {
             setOptionDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_rightDrawable));
         }
 
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintMargin)) {
-            int hintMargin = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_hintMargin, 0);
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelMargin)) {
+            int hintMargin = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_labelMargin, 0);
             setHintMargin(hintMargin);
         }
 
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintGravity)) {
-            int attrVal = a.getInt(R.styleable.LayoutRowViewNormal_rv_hintGravity, getHintDefaultGravity());
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelGravity)) {
+            int attrVal = a.getInt(R.styleable.LayoutRowViewNormal_rv_labelGravity, getHintDefaultGravity());
             setHintGravity(Gravity.create(attrVal));
         }
 
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_hintLayout)) {
-            int resId = a.getResourceId(R.styleable.LayoutRowViewNormal_rv_hintLayout, 0);
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelLayout)) {
+            int resId = a.getResourceId(R.styleable.LayoutRowViewNormal_rv_labelLayout, 0);
             if(resId > 0) {
                 replaceHint(resId);
             }
@@ -339,6 +334,25 @@ public abstract class AbstractRowView extends RelativeLayout {
         rvTitle.setEllipsize(truncateAt);
     }
 
+    public void setTitleStyle(int textStyle) {
+        Typeface typeface;
+        switch (textStyle) {
+            case 2:
+                typeface = Typeface.defaultFromStyle(Typeface.BOLD);
+                break;
+            case 3:
+                typeface = Typeface.defaultFromStyle(Typeface.ITALIC);
+                break;
+            case 4:
+                typeface = Typeface.defaultFromStyle(Typeface.BOLD_ITALIC);
+                break;
+            default:
+                typeface = Typeface.defaultFromStyle(Typeface.NORMAL);
+                break;
+        }
+        rvTitle.setTypeface(typeface);
+    }
+
     public void setHintSize(int unit, float size) {
         if(rvHint == null) return;
 
@@ -372,7 +386,7 @@ public abstract class AbstractRowView extends RelativeLayout {
     public void setIconPadding(int padding) {
         if(rvIcon == null) return;
 
-        RelativeLayout.LayoutParams params = (LayoutParams) rvIcon.getLayoutParams();
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) rvIcon.getLayoutParams();
         params.rightMargin = padding;
         rvIcon.setLayoutParams(params);
     }
@@ -380,7 +394,7 @@ public abstract class AbstractRowView extends RelativeLayout {
     public void setIconSize(int width, int height) {
         if(rvIcon == null) return;
 
-        RelativeLayout.LayoutParams params = (LayoutParams) rvIcon.getLayoutParams();
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) rvIcon.getLayoutParams();
         params.width = width;
         params.height = height;
         rvIcon.setLayoutParams(params);
@@ -388,7 +402,7 @@ public abstract class AbstractRowView extends RelativeLayout {
 
     public void setOptionPadding(int padding) {
         if(viewOption != null) {
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) viewOption.getLayoutParams();
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewOption.getLayoutParams();
             params.leftMargin = padding;
             viewOption.setLayoutParams(params);
         }

@@ -1,9 +1,7 @@
 package com.cabe.lib.ui.rowview;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -36,11 +34,6 @@ public class TipsRowView extends AbstractRowView {
         super(context, attrs, defStyleAttr);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public TipsRowView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
     @Override
     protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_tips, this);
@@ -58,13 +51,13 @@ public class TipsRowView extends AbstractRowView {
     }
 
     @Override
-    protected void initAttr(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super.initAttr(context, attrs, defStyleAttr, defStyleRes);
+    protected void initAttr(Context context, AttributeSet attrs, int defStyleAttr) {
+        super.initAttr(context, attrs, defStyleAttr);
         showHint(true);
 
         float density = context.getResources().getDisplayMetrics().density;
         int defaultSize = (int) (density * DEFAULT_TIPS_SIZE);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LayoutRowViewNormal, defStyleAttr, defStyleRes);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LayoutRowViewNormal, defStyleAttr, 0);
 
         setTipsSize1(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_tipsSize_1, defaultSize));
         setTipsColor1(a.getColor(R.styleable.LayoutRowViewNormal_rv_tipsColor_1, DEFAULT_TIPS_COLOR));

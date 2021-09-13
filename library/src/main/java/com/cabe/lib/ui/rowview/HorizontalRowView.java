@@ -3,6 +3,7 @@ package com.cabe.lib.ui.rowview;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
@@ -23,11 +24,6 @@ public class HorizontalRowView extends AbstractRowView {
 
     public HorizontalRowView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public HorizontalRowView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
     }
 
     @Override
@@ -56,7 +52,7 @@ public class HorizontalRowView extends AbstractRowView {
 
     @Override
     public void setHintMargin(int margin) {
-        RelativeLayout.LayoutParams params = (LayoutParams) viewHint.getLayoutParams();
+        ConstraintLayout.LayoutParams params = (LayoutParams) viewHint.getLayoutParams();
         params.leftMargin = margin;
         viewHint.setLayoutParams(params);
     }
