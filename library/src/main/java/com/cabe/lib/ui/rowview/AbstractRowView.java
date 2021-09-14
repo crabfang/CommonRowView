@@ -132,8 +132,8 @@ public abstract class AbstractRowView extends ConstraintLayout {
         setLabel(0);
         setLabelSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_labelSize, DEFAULT_LABEL_SIZE));
         setLabelColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_labelColor, DEFAULT_LABEL_COLOR));
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelValue)) {
-            setLabel(a.getText(R.styleable.LayoutRowViewNormal_rv_labelValue));
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_label)) {
+            setLabel(a.getText(R.styleable.LayoutRowViewNormal_rv_label));
         } else {
             setLabel("");
         }
@@ -147,32 +147,26 @@ public abstract class AbstractRowView extends ConstraintLayout {
             int val = a.getInt(R.styleable.LayoutRowViewNormal_rv_labelStyle, TEXT_STYLE_NORMAL);
             setLabelStyle(val);
         }
-
-        int optionPadding = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_optionPadding, DEFAULT_OPTION_PADDING);
-        setOptionPadding(optionPadding);
-
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_pointDrawable)) {
-            setFlagDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_pointDrawable));
-        }
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_rightDrawable)) {
-            setOptionDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_rightDrawable));
-        }
-
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelMargin)) {
-            int labelMargin = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_labelMargin, 0);
-            setLabelMargin(labelMargin);
-        }
-
+        int labelMargin = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_labelMargin, 0);
+        setLabelMargin(labelMargin);
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelGravity)) {
             int attrVal = a.getInt(R.styleable.LayoutRowViewNormal_rv_labelGravity, getLabelDefaultGravity());
             setLabelGravity(Gravity.create(attrVal));
         }
-
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelLayout)) {
             int resId = a.getResourceId(R.styleable.LayoutRowViewNormal_rv_labelLayout, 0);
             if(resId > 0) {
                 replaceLabel(resId);
             }
+        }
+
+        int optionPadding = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_optionPadding, DEFAULT_OPTION_PADDING);
+        setOptionPadding(optionPadding);
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_pointDrawable)) {
+            setFlagDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_pointDrawable));
+        }
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_optionDrawable)) {
+            setOptionDrawable(a.getDrawable(R.styleable.LayoutRowViewNormal_rv_optionDrawable));
         }
 
         showDivider = a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showDivider, false);
@@ -193,7 +187,7 @@ public abstract class AbstractRowView extends ConstraintLayout {
             dividerMarginRight = a.getDimensionPixelOffset(R.styleable.LayoutRowViewNormal_rv_dividerMarginRight, -1);
         }
 
-        showRight(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showRight, true));
+        showOption(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showOption, true));
         showLabel(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showLabel, false));
         showPoint(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showPoint, false));
 
@@ -425,10 +419,8 @@ public abstract class AbstractRowView extends ConstraintLayout {
     }
 
     public void setOptionPadding(int padding) {
-        if(viewLabel != null) {
-            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewLabel.getLayoutParams();
-            params.rightMargin = padding;
-            viewLabel.setLayoutParams(params);
+        if(viewOption != null) {
+            viewOption.setPadding(padding, viewOption.getPaddingTop(), viewOption.getPaddingRight(), viewOption.getPaddingBottom());
         }
     }
 
@@ -489,7 +481,7 @@ public abstract class AbstractRowView extends ConstraintLayout {
         viewLabel.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
-    public void showRight(boolean show) {
+    public void showOption(boolean show) {
         if(viewOption == null) return;
 
         viewOption.setVisibility(show ? View.VISIBLE : View.GONE);

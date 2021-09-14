@@ -55,10 +55,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        tools:layout_marginLeft="10dp"
         app:layout_constrainedWidth="true"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintLeft_toRightOf="@+id/layout_custom_row_t_icon"
+        app:layout_constraintLeft_toLeftOf="@+id/layout_custom_row_t_view_title"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_custom_row_t_view_title"
         app:layout_constraintBottom_toBottomOf="parent" >
