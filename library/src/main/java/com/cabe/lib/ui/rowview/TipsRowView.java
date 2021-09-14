@@ -35,6 +35,12 @@ public class TipsRowView extends AbstractRowView {
     }
 
     @Override
+    protected void initDefaultConfig() {
+        super.initDefaultConfig();
+        DEFAULT_LABEL_LINE = 1;
+    }
+
+    @Override
     protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_tips, this);
         viewTitle = findViewById(R.id.layout_custom_row_t_view_title);

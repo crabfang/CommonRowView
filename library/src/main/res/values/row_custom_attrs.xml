@@ -37,6 +37,12 @@
             <enum name="Center" value="2" />
             <enum name="Right" value="3" />
         </attr>
+        <attr name="rv_labelStyle">
+            <enum name="normal" value="1" />
+            <enum name="bold" value="2" />
+            <enum name="italic" value="3" />
+            <enum name="bold_italic" value="4" />
+        </attr>
         <attr name="rv_labelLayout" format="reference" />
         <attr name="rv_tipsSize_1" format="dimension|reference" />
         <attr name="rv_tipsColor_1" format="color|reference" />

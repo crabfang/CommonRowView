@@ -23,6 +23,10 @@ import android.widget.TextView;
  * Created by cabe on 16/3/28.
  */
 public abstract class AbstractRowView extends ConstraintLayout {
+    public final static int TEXT_STYLE_NORMAL = 1;
+    public final static int TEXT_STYLE_BOLD = 2;
+    public final static int TEXT_STYLE_ITALIC = 3;
+    public final static int TEXT_STYLE_BOLD_ITALIC = 4;
     protected View viewTitle;
     protected RelativeLayout viewLabel;
     protected RelativeLayout viewOption;
@@ -38,6 +42,8 @@ public abstract class AbstractRowView extends ConstraintLayout {
     protected int DEFAULT_TITLE_COLOR = 0xFF666666;
     protected int DEFAULT_LABEL_SIZE = 0;
     protected int DEFAULT_LABEL_COLOR = 0xFF999999;
+    protected int DEFAULT_TITLE_LINE = 1;
+    protected int DEFAULT_LABEL_LINE = 2;
 
     private boolean showDivider = false;
     private DividerPosition dividerPosition;
@@ -57,17 +63,21 @@ public abstract class AbstractRowView extends ConstraintLayout {
     public AbstractRowView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        initDefaultConfig(context);
+        initDefaultConfig();
         initView(context);
         initAttr(context, attrs, defStyleAttr);
     }
 
-    private void initDefaultConfig(Context context) {
-        float density = context.getResources().getDisplayMetrics().density;
-        DEFAULT_ICON_PADDING = (int) (density * 5);
-        DEFAULT_OPTION_PADDING = (int) (density * 10);
-        DEFAULT_TITLE_SIZE = (int) (density * 16);
-        DEFAULT_LABEL_SIZE = (int) (density * 12);
+    private int getSP(int val) {
+        float density = getResources().getDisplayMetrics().density;
+        return (int) (density * val);
+    }
+
+    protected void initDefaultConfig() {
+        DEFAULT_ICON_PADDING = getSP(5);
+        DEFAULT_OPTION_PADDING = getSP(10);
+        DEFAULT_TITLE_SIZE = getSP(16);
+        DEFAULT_LABEL_SIZE = getSP(12);
     }
 
     protected abstract void initView(Context context);
@@ -82,10 +92,7 @@ public abstract class AbstractRowView extends ConstraintLayout {
         } else {
             setIcon(0);
         }
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding)) {
-            setIconPadding((int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding, DEFAULT_ICON_PADDING));
-            rvIcon.setVisibility(View.VISIBLE);
-        }
+        setIconPadding((int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding, DEFAULT_ICON_PADDING));
 
         int defaultWidth = LayoutParams.WRAP_CONTENT;
         int iconWidth = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawableWidth, defaultWidth);
@@ -111,17 +118,14 @@ public abstract class AbstractRowView extends ConstraintLayout {
         } else {
             setTitleWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         }
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleMaxLines)) {
-            int maxLines = a.getInt(R.styleable.LayoutRowViewNormal_rv_titleMaxLines, 1);
-            setTitleMaxLines(maxLines);
-        }
+        setTitleMaxLines(a.getInt(R.styleable.LayoutRowViewNormal_rv_titleMaxLines, DEFAULT_TITLE_LINE));
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleEllipsize)) {
             int val = a.getInt(R.styleable.LayoutRowViewNormal_rv_titleEllipsize, 3);
             Ellipsize ellipsize = Ellipsize.create(val);
             setTitleEllipsize(ellipsize);
         }
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleStyle)) {
-            int val = a.getInt(R.styleable.LayoutRowViewNormal_rv_titleStyle, 1);
+            int val = a.getInt(R.styleable.LayoutRowViewNormal_rv_titleStyle, TEXT_STYLE_NORMAL);
             setTitleStyle(val);
         }
 
@@ -133,14 +137,15 @@ public abstract class AbstractRowView extends ConstraintLayout {
         } else {
             setLabel("");
         }
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelMaxLines)) {
-            int maxLines = a.getInt(R.styleable.LayoutRowViewNormal_rv_labelMaxLines, 1);
-            setLabelMaxLines(maxLines);
-        }
+        setLabelMaxLines(a.getInt(R.styleable.LayoutRowViewNormal_rv_labelMaxLines, DEFAULT_LABEL_LINE));
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelEllipsize)) {
             int val = a.getInt(R.styleable.LayoutRowViewNormal_rv_labelEllipsize, 3);
             Ellipsize ellipsize = Ellipsize.create(val);
             setLabelEllipsize(ellipsize);
+        }
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelStyle)) {
+            int val = a.getInt(R.styleable.LayoutRowViewNormal_rv_labelStyle, TEXT_STYLE_NORMAL);
+            setLabelStyle(val);
         }
 
         int optionPadding = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_optionPadding, DEFAULT_OPTION_PADDING);
@@ -337,13 +342,13 @@ public abstract class AbstractRowView extends ConstraintLayout {
     public void setTitleStyle(int textStyle) {
         Typeface typeface;
         switch (textStyle) {
-            case 2:
+            case TEXT_STYLE_BOLD:
                 typeface = Typeface.defaultFromStyle(Typeface.BOLD);
                 break;
-            case 3:
+            case TEXT_STYLE_ITALIC:
                 typeface = Typeface.defaultFromStyle(Typeface.ITALIC);
                 break;
-            case 4:
+            case TEXT_STYLE_BOLD_ITALIC:
                 typeface = Typeface.defaultFromStyle(Typeface.BOLD_ITALIC);
                 break;
             default:
@@ -383,12 +388,31 @@ public abstract class AbstractRowView extends ConstraintLayout {
         viewLabel.setGravity(gravityVal);
     }
 
-    public void setIconPadding(int padding) {
-        if(rvIcon == null) return;
+    public void setLabelStyle(int textStyle) {
+        Typeface typeface;
+        switch (textStyle) {
+            case TEXT_STYLE_BOLD:
+                typeface = Typeface.defaultFromStyle(Typeface.BOLD);
+                break;
+            case TEXT_STYLE_ITALIC:
+                typeface = Typeface.defaultFromStyle(Typeface.ITALIC);
+                break;
+            case TEXT_STYLE_BOLD_ITALIC:
+                typeface = Typeface.defaultFromStyle(Typeface.BOLD_ITALIC);
+                break;
+            default:
+                typeface = Typeface.defaultFromStyle(Typeface.NORMAL);
+                break;
+        }
+        rvLabel.setTypeface(typeface);
+    }
 
-        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) rvIcon.getLayoutParams();
-        params.rightMargin = padding;
-        rvIcon.setLayoutParams(params);
+    public void setIconPadding(int padding) {
+        if(viewTitle != null) {
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewTitle.getLayoutParams();
+            params.leftMargin = padding;
+            viewTitle.setLayoutParams(params);
+        }
     }
 
     public void setIconSize(int width, int height) {
@@ -401,10 +425,10 @@ public abstract class AbstractRowView extends ConstraintLayout {
     }
 
     public void setOptionPadding(int padding) {
-        if(viewOption != null) {
-            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewOption.getLayoutParams();
-            params.leftMargin = padding;
-            viewOption.setLayoutParams(params);
+        if(viewLabel != null) {
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewLabel.getLayoutParams();
+            params.rightMargin = padding;
+            viewLabel.setLayoutParams(params);
         }
     }
 
