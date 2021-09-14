@@ -1,10 +1,11 @@
 change log
 ==========
-v2.0.5 2021-09-13
+v2.0.6 2021-09-13
 -----------------
 1、优化布局文件，改用ConstraintLayout
 2、改过熟悉rv_hintX为rv_labelX
 3、新增rv_titleStyle属性
+
 v1.5.3 2020-04-02
 -----------------
 1、新增TitleLabelLayout控件

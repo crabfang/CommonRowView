@@ -93,6 +93,9 @@ public abstract class AbstractRowView extends ConstraintLayout {
             setIcon(0);
         }
         setIconPadding((int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding, DEFAULT_ICON_PADDING));
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding)) {
+            rvIcon.setVisibility(View.VISIBLE);
+        }
 
         int defaultWidth = LayoutParams.WRAP_CONTENT;
         int iconWidth = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawableWidth, defaultWidth);
@@ -254,6 +257,23 @@ public abstract class AbstractRowView extends ConstraintLayout {
         rvIcon.setVisibility(bmp == null ? View.GONE : View.VISIBLE);
     }
 
+    public void setIconPadding(int padding) {
+        if(viewTitle != null) {
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewTitle.getLayoutParams();
+            params.leftMargin = padding;
+            viewTitle.setLayoutParams(params);
+        }
+    }
+
+    public void setIconSize(int width, int height) {
+        if(rvIcon == null) return;
+
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) rvIcon.getLayoutParams();
+        params.width = width;
+        params.height = height;
+        rvIcon.setLayoutParams(params);
+    }
+
     public void setLabel(int labelRes) {
         if(rvLabel == null) return;
 
@@ -399,23 +419,6 @@ public abstract class AbstractRowView extends ConstraintLayout {
                 break;
         }
         rvLabel.setTypeface(typeface);
-    }
-
-    public void setIconPadding(int padding) {
-        if(viewTitle != null) {
-            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewTitle.getLayoutParams();
-            params.leftMargin = padding;
-            viewTitle.setLayoutParams(params);
-        }
-    }
-
-    public void setIconSize(int width, int height) {
-        if(rvIcon == null) return;
-
-        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) rvIcon.getLayoutParams();
-        params.width = width;
-        params.height = height;
-        rvIcon.setLayoutParams(params);
     }
 
     public void setOptionPadding(int padding) {
