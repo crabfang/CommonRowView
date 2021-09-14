@@ -81,6 +81,7 @@
         app:rv_showLabel="true"
         app:rv_label="Vertical Label Vertical Label Vertical Label Vertical Label Vertical Label Vertical Label Vertical Label Vertical Label"
         app:rv_labelMaxLines="2"
+        app:rv_labelMargin="2dp"
         app:rv_optionPadding="2dp"
         android:tag="Vertical Tag"
         android:onClick="onClick" />
@@ -99,6 +100,7 @@
         app:rv_tips_2="Vertical Tips 2"
         app:rv_optionPadding="2dp"
         app:rv_showLabel="true"
+        app:rv_labelMargin="2dp"
         android:tag="Vertical Tag"
         android:onClick="onClick" />
 

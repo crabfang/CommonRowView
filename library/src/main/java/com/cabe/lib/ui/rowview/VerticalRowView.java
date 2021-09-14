@@ -1,9 +1,9 @@
 package com.cabe.lib.ui.rowview;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.LinearLayout;
 
 /**
  * 垂直布局的操作栏
@@ -39,7 +39,7 @@ public class VerticalRowView extends AbstractRowView {
 
     @Override
     public void setLabelMargin(int margin) {
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewLabel.getLayoutParams();
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewLabel.getLayoutParams();
         params.topMargin = margin;
         viewLabel.setLayoutParams(params);
     }

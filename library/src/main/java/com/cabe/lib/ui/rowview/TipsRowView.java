@@ -2,6 +2,7 @@ package com.cabe.lib.ui.rowview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.constraint.ConstraintLayout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -93,7 +94,7 @@ public class TipsRowView extends AbstractRowView {
 
     @Override
     public void setLabelMargin(int margin) {
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewLabel.getLayoutParams();
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewLabel.getLayoutParams();
         params.topMargin = margin;
         viewLabel.setLayoutParams(params);
     }
