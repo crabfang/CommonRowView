@@ -24,20 +24,20 @@ import android.widget.TextView;
  */
 public abstract class AbstractRowView extends ConstraintLayout {
     protected View viewTitle;
-    protected RelativeLayout viewHint;
+    protected RelativeLayout viewLabel;
     protected RelativeLayout viewOption;
     protected ImageView rvIcon;
     protected TextView rvTitle;
     protected ImageView rvFlag;
-    protected TextView rvHint;
+    protected TextView rvLabel;
     protected ImageView rvOption;
 
     protected int DEFAULT_ICON_PADDING = 0;
     protected int DEFAULT_OPTION_PADDING = 0;
     protected int DEFAULT_TITLE_SIZE = 0;
     protected int DEFAULT_TITLE_COLOR = 0xFF666666;
-    protected int DEFAULT_HINT_SIZE = 0;
-    protected int DEFAULT_HINT_COLOR = 0xFF999999;
+    protected int DEFAULT_LABEL_SIZE = 0;
+    protected int DEFAULT_LABEL_COLOR = 0xFF999999;
 
     private boolean showDivider = false;
     private DividerPosition dividerPosition;
@@ -67,12 +67,12 @@ public abstract class AbstractRowView extends ConstraintLayout {
         DEFAULT_ICON_PADDING = (int) (density * 5);
         DEFAULT_OPTION_PADDING = (int) (density * 10);
         DEFAULT_TITLE_SIZE = (int) (density * 16);
-        DEFAULT_HINT_SIZE = (int) (density * 12);
+        DEFAULT_LABEL_SIZE = (int) (density * 12);
     }
 
     protected abstract void initView(Context context);
     protected abstract int getTitleDefaultGravity();
-    protected abstract int getHintDefaultGravity();
+    protected abstract int getLabelDefaultGravity();
 
     protected void initAttr(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LayoutRowViewNormal, defStyleAttr, 0);
@@ -125,22 +125,22 @@ public abstract class AbstractRowView extends ConstraintLayout {
             setTitleStyle(val);
         }
 
-        setHint(0);
-        setHintSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_labelSize, DEFAULT_HINT_SIZE));
-        setHintColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_labelColor, DEFAULT_HINT_COLOR));
+        setLabel(0);
+        setLabelSize(TypedValue.COMPLEX_UNIT_PX, a.getDimension(R.styleable.LayoutRowViewNormal_rv_labelSize, DEFAULT_LABEL_SIZE));
+        setLabelColor(a.getColor(R.styleable.LayoutRowViewNormal_rv_labelColor, DEFAULT_LABEL_COLOR));
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelValue)) {
-            setHint(a.getText(R.styleable.LayoutRowViewNormal_rv_labelValue));
+            setLabel(a.getText(R.styleable.LayoutRowViewNormal_rv_labelValue));
         } else {
-            setHint("");
+            setLabel("");
         }
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelMaxLines)) {
             int maxLines = a.getInt(R.styleable.LayoutRowViewNormal_rv_labelMaxLines, 1);
-            setHintMaxLines(maxLines);
+            setLabelMaxLines(maxLines);
         }
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelEllipsize)) {
             int val = a.getInt(R.styleable.LayoutRowViewNormal_rv_labelEllipsize, 3);
             Ellipsize ellipsize = Ellipsize.create(val);
-            setHintEllipsize(ellipsize);
+            setLabelEllipsize(ellipsize);
         }
 
         int optionPadding = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_optionPadding, DEFAULT_OPTION_PADDING);
@@ -154,19 +154,19 @@ public abstract class AbstractRowView extends ConstraintLayout {
         }
 
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelMargin)) {
-            int hintMargin = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_labelMargin, 0);
-            setHintMargin(hintMargin);
+            int labelMargin = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_labelMargin, 0);
+            setLabelMargin(labelMargin);
         }
 
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelGravity)) {
-            int attrVal = a.getInt(R.styleable.LayoutRowViewNormal_rv_labelGravity, getHintDefaultGravity());
-            setHintGravity(Gravity.create(attrVal));
+            int attrVal = a.getInt(R.styleable.LayoutRowViewNormal_rv_labelGravity, getLabelDefaultGravity());
+            setLabelGravity(Gravity.create(attrVal));
         }
 
         if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelLayout)) {
             int resId = a.getResourceId(R.styleable.LayoutRowViewNormal_rv_labelLayout, 0);
             if(resId > 0) {
-                replaceHint(resId);
+                replaceLabel(resId);
             }
         }
 
@@ -188,8 +188,8 @@ public abstract class AbstractRowView extends ConstraintLayout {
             dividerMarginRight = a.getDimensionPixelOffset(R.styleable.LayoutRowViewNormal_rv_dividerMarginRight, -1);
         }
 
-        showOption(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showRight, true));
-        showHint(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showHint, false));
+        showRight(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showRight, true));
+        showLabel(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showLabel, false));
         showPoint(a.getBoolean(R.styleable.LayoutRowViewNormal_rv_showPoint, false));
 
         a.recycle();
@@ -226,10 +226,10 @@ public abstract class AbstractRowView extends ConstraintLayout {
         rvTitle.setText(titleRes);
     }
 
-    public void setTitle(CharSequence hint) {
+    public void setTitle(CharSequence titleStr) {
         if(rvTitle == null) return;
 
-        rvTitle.setText(hint);
+        rvTitle.setText(titleStr);
     }
 
     public void setIcon(int iconRes) {
@@ -255,20 +255,20 @@ public abstract class AbstractRowView extends ConstraintLayout {
         rvIcon.setVisibility(bmp == null ? View.GONE : View.VISIBLE);
     }
 
-    public void setHint(int hintRes) {
-        if(rvHint == null) return;
+    public void setLabel(int labelRes) {
+        if(rvLabel == null) return;
 
-        showHint(hintRes > 0);
-        if(hintRes > 0) {
-            rvHint.setText(hintRes);
+        showLabel(labelRes > 0);
+        if(labelRes > 0) {
+            rvLabel.setText(labelRes);
         }
     }
 
-    public void setHint(CharSequence hint) {
-        if(rvHint == null) return;
+    public void setLabel(CharSequence labelStr) {
+        if(rvLabel == null) return;
 
-        rvHint.setText(hint);
-        rvHint.setVisibility(TextUtils.isEmpty(hint) ? View.GONE : View.VISIBLE);
+        rvLabel.setText(labelStr);
+        rvLabel.setVisibility(TextUtils.isEmpty(labelStr) ? View.GONE : View.VISIBLE);
     }
 
     public void setTitleSize(int unit, float size) {
@@ -353,20 +353,20 @@ public abstract class AbstractRowView extends ConstraintLayout {
         rvTitle.setTypeface(typeface);
     }
 
-    public void setHintSize(int unit, float size) {
-        if(rvHint == null) return;
+    public void setLabelSize(int unit, float size) {
+        if(rvLabel == null) return;
 
-        rvHint.setTextSize(unit, size);
+        rvLabel.setTextSize(unit, size);
     }
 
-    public void setHintColor(int color) {
-        if(rvHint == null) return;
+    public void setLabelColor(int color) {
+        if(rvLabel == null) return;
 
-        rvHint.setTextColor(color);
+        rvLabel.setTextColor(color);
     }
 
-    public void setHintGravity(Gravity gravity) {
-        if(viewHint == null) return;
+    public void setLabelGravity(Gravity gravity) {
+        if(viewLabel == null) return;
 
         int gravityVal = android.view.Gravity.LEFT;
         switch(gravity) {
@@ -380,7 +380,7 @@ public abstract class AbstractRowView extends ConstraintLayout {
                 gravityVal = android.view.Gravity.RIGHT;
                 break;
         }
-        viewHint.setGravity(gravityVal);
+        viewLabel.setGravity(gravityVal);
     }
 
     public void setIconPadding(int padding) {
@@ -426,15 +426,15 @@ public abstract class AbstractRowView extends ConstraintLayout {
         rvOption.setImageResource(resId);
     }
 
-    public void setHintMaxLines(int maxLines) {
-        if(rvHint == null || maxLines <= 0) return;
+    public void setLabelMaxLines(int maxLines) {
+        if(rvLabel == null || maxLines <= 0) return;
 
-        rvHint.setSingleLine(false);
-        rvHint.setMaxLines(maxLines);
+        rvLabel.setSingleLine(false);
+        rvLabel.setMaxLines(maxLines);
     }
 
-    public void setHintEllipsize(Ellipsize ellipsize) {
-        if(rvHint == null || ellipsize == null) return;
+    public void setLabelEllipsize(Ellipsize ellipsize) {
+        if(rvLabel == null || ellipsize == null) return;
 
         TextUtils.TruncateAt truncateAt;
         switch (ellipsize) {
@@ -448,10 +448,10 @@ public abstract class AbstractRowView extends ConstraintLayout {
                 truncateAt = TextUtils.TruncateAt.END;
                 break;
         }
-        rvHint.setEllipsize(truncateAt);
+        rvLabel.setEllipsize(truncateAt);
     }
 
-    public abstract void setHintMargin(int margin);
+    public abstract void setLabelMargin(int margin);
 
     public void showHead(boolean show) {
         if(viewTitle == null) return;
@@ -459,13 +459,13 @@ public abstract class AbstractRowView extends ConstraintLayout {
         viewTitle.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
-    public void showHint(boolean show) {
-        if(viewHint == null) return;
+    public void showLabel(boolean show) {
+        if(viewLabel == null) return;
 
-        viewHint.setVisibility(show ? View.VISIBLE : View.GONE);
+        viewLabel.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
-    public void showOption(boolean show) {
+    public void showRight(boolean show) {
         if(viewOption == null) return;
 
         viewOption.setVisibility(show ? View.VISIBLE : View.GONE);
@@ -477,17 +477,17 @@ public abstract class AbstractRowView extends ConstraintLayout {
         rvFlag.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
-    public void replaceHint(int resId) {
-        if(viewHint != null && resId > 0) {
-            View viewInner = LayoutInflater.from(getContext()).inflate(resId, viewHint, false);
-            replaceHint(viewInner);
+    public void replaceLabel(int resId) {
+        if(viewLabel != null && resId > 0) {
+            View viewInner = LayoutInflater.from(getContext()).inflate(resId, viewLabel, false);
+            replaceLabel(viewInner);
         }
     }
 
-    public void replaceHint(View viewInner) {
-        if(viewHint != null && viewInner != null) {
-            viewHint.removeAllViews();
-            viewHint.addView(viewInner);
+    public void replaceLabel(View viewInner) {
+        if(viewLabel != null && viewInner != null) {
+            viewLabel.removeAllViews();
+            viewLabel.addView(viewInner);
         }
     }
 
@@ -495,16 +495,16 @@ public abstract class AbstractRowView extends ConstraintLayout {
         return rvTitle == null ? "" : rvTitle.getText().toString();
     }
 
-    public String getHint() {
-        return rvHint == null ? "" : rvHint.getText().toString();
+    public String getLabel() {
+        return rvLabel == null ? "" : rvLabel.getText().toString();
     }
 
     public View getViewTitle() {
         return viewTitle;
     }
 
-    public View getViewHint() {
-        return viewHint;
+    public View getViewLabel() {
+        return viewLabel;
     }
 
     public RelativeLayout getViewOption() {
@@ -515,8 +515,8 @@ public abstract class AbstractRowView extends ConstraintLayout {
         return rvTitle;
     }
 
-    public TextView getTextHint() {
-        return rvHint;
+    public TextView getTextLabel() {
+        return rvLabel;
     }
 
     public ImageView getImageIcon() {

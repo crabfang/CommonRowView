@@ -38,12 +38,12 @@ public class TipsRowView extends AbstractRowView {
     protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_tips, this);
         viewTitle = findViewById(R.id.layout_custom_row_t_view_title);
-        viewHint = findViewById(R.id.layout_custom_row_t_view_hint);
+        viewLabel = findViewById(R.id.layout_custom_row_t_view_hint);
 
         rvIcon = findViewById(R.id.layout_custom_row_t_icon);
         rvTitle = findViewById(R.id.layout_custom_row_t_head_title);
         rvFlag = findViewById(R.id.layout_custom_row_t_head_point);
-        rvHint = findViewById(R.id.layout_custom_row_t_hint_tips);
+        rvLabel = findViewById(R.id.layout_custom_row_t_hint_tips);
 
         viewTips = findViewById(R.id.layout_custom_row_t_view_tips);
         rvTips1 = findViewById(R.id.layout_custom_row_t_tips_info);
@@ -53,7 +53,7 @@ public class TipsRowView extends AbstractRowView {
     @Override
     protected void initAttr(Context context, AttributeSet attrs, int defStyleAttr) {
         super.initAttr(context, attrs, defStyleAttr);
-        showHint(true);
+        showLabel(true);
 
         float density = context.getResources().getDisplayMetrics().density;
         int defaultSize = (int) (density * DEFAULT_TIPS_SIZE);
@@ -86,10 +86,10 @@ public class TipsRowView extends AbstractRowView {
     }
 
     @Override
-    public void setHintMargin(int margin) {
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHint.getLayoutParams();
+    public void setLabelMargin(int margin) {
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewLabel.getLayoutParams();
         params.topMargin = margin;
-        viewHint.setLayoutParams(params);
+        viewLabel.setLayoutParams(params);
     }
 
     public void setTipsColor1(int color) {
@@ -142,8 +142,8 @@ public class TipsRowView extends AbstractRowView {
     }
 
     public void replaceTips(int resId) {
-        if(viewHint != null && resId > 0) {
-            View viewInner = LayoutInflater.from(getContext()).inflate(resId, viewHint, false);
+        if(viewLabel != null && resId > 0) {
+            View viewInner = LayoutInflater.from(getContext()).inflate(resId, viewLabel, false);
             replaceTips(viewInner);
         }
     }
@@ -165,7 +165,7 @@ public class TipsRowView extends AbstractRowView {
     }
 
     @Override
-    protected int getHintDefaultGravity() {
+    protected int getLabelDefaultGravity() {
         return Gravity.Left.getVal();
     }
 }

@@ -27,21 +27,21 @@ public class VerticalRowView extends AbstractRowView {
         protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_vertical, this);
         viewTitle = findViewById(R.id.layout_custom_row_v_view_head);
-        viewHint = findViewById(R.id.layout_custom_row_v_view_hint);
+        viewLabel = findViewById(R.id.layout_custom_row_v_view_hint);
         viewOption = findViewById(R.id.layout_custom_row_v_view_option);
 
         rvIcon = findViewById(R.id.layout_custom_row_v_icon);
         rvTitle = findViewById(R.id.layout_custom_row_v_head_title);
         rvFlag = findViewById(R.id.layout_custom_row_v_head_point);
-        rvHint = findViewById(R.id.layout_custom_row_v_hint_tips);
+        rvLabel = findViewById(R.id.layout_custom_row_v_hint_tips);
         rvOption = findViewById(R.id.layout_custom_row_v_op_arrow);
     }
 
     @Override
-    public void setHintMargin(int margin) {
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewHint.getLayoutParams();
+    public void setLabelMargin(int margin) {
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) viewLabel.getLayoutParams();
         params.topMargin = margin;
-        viewHint.setLayoutParams(params);
+        viewLabel.setLayoutParams(params);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class VerticalRowView extends AbstractRowView {
     }
 
     @Override
-    protected int getHintDefaultGravity() {
+    protected int getLabelDefaultGravity() {
         return Gravity.Left.getVal();
     }
 }
