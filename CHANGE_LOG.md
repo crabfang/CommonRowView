@@ -1,6 +1,6 @@
 change log
 ==========
-v2.0.2 2021-09-13
+v2.0.5 2021-09-13
 -----------------
 1、优化布局文件，改用ConstraintLayout
 2、改过熟悉rv_hintX为rv_labelX

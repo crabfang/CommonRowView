@@ -23,7 +23,10 @@
         android:layout_centerVertical="true"
         android:orientation="horizontal"
         tools:layout_marginLeft="10dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintLeft_toRightOf="@+id/layout_custom_row_h_icon"
+        app:layout_constraintRight_toLeftOf="@+id/layout_custom_row_h_view_option"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" >
 
@@ -35,7 +38,7 @@
             android:ellipsize="end"
             android:textSize="16sp"
             android:textColor="#666666"
-            tools:text="@string/app_name" />
+            tools:text="string_app_name" />
 
         <ImageView
             android:id="@+id/layout_custom_row_h_head_point"
@@ -53,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:gravity="center_vertical|right"
-        tools:layout_marginRight="10dp"
+        tools:layout_marginLeft="10dp"
         app:layout_constrainedWidth="true"
         app:layout_constraintHorizontal_bias="100"
         app:layout_constraintLeft_toRightOf="@+id/layout_custom_row_h_view_title"
@@ -78,6 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        tools:paddingLeft="10dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" >
