@@ -55,7 +55,7 @@ public class HorizontalRowView extends AbstractRowView {
     }
 
     @Override
-    protected void updateViewLabelWrap(boolean wrap) {
+    public void updateViewLabelWrap(boolean wrap) {
         ConstraintLayout.LayoutParams params = (LayoutParams) viewLabel.getLayoutParams();
         if(wrap) params.width = LayoutParams.WRAP_CONTENT;
         else params.width = 0;
