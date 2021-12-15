@@ -27,13 +27,13 @@ public class VerticalRowView extends AbstractRowView {
         protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_vertical, this);
         viewTitle = findViewById(R.id.layout_custom_row_v_view_head);
-        viewLabel = findViewById(R.id.layout_custom_row_v_view_hint);
+        viewLabel = findViewById(R.id.layout_custom_row_v_view_label);
         viewOption = findViewById(R.id.layout_custom_row_v_view_option);
 
         rvIcon = findViewById(R.id.layout_custom_row_v_icon);
         rvTitle = findViewById(R.id.layout_custom_row_v_head_title);
         rvFlag = findViewById(R.id.layout_custom_row_v_head_point);
-        rvLabel = findViewById(R.id.layout_custom_row_v_hint_tips);
+        rvLabel = findViewById(R.id.layout_custom_row_v_label_tips);
         rvOption = findViewById(R.id.layout_custom_row_v_op_arrow);
     }
 

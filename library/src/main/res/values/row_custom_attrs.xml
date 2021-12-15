@@ -32,6 +32,7 @@
         <attr name="rv_labelColor" format="color|reference" />
         <attr name="rv_label" format="string|reference" />
         <attr name="rv_labelMargin" format="dimension|reference" />
+        <attr name="rv_labelWrap" format="boolean" />
         <attr name="rv_labelGravity">
             <enum name="Left" value="1" />
             <enum name="Center" value="2" />

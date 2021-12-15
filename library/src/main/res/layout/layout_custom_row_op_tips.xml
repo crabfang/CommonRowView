@@ -28,7 +28,7 @@
         app:layout_constraintLeft_toRightOf="@+id/layout_custom_row_t_icon"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/layout_custom_row_t_view_hint" >
+        app:layout_constraintBottom_toTopOf="@+id/layout_custom_row_t_view_label" >
 
         <TextView
             android:id="@+id/layout_custom_row_t_head_title"
@@ -51,7 +51,7 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/layout_custom_row_t_view_hint"
+        android:id="@+id/layout_custom_row_t_view_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -63,7 +63,7 @@
         app:layout_constraintBottom_toBottomOf="parent" >
 
         <TextView
-            android:id="@+id/layout_custom_row_t_hint_tips"
+            android:id="@+id/layout_custom_row_t_label_tips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -79,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="right"
-        app:constraint_referenced_ids="layout_custom_row_t_view_title,layout_custom_row_t_view_hint" />
+        app:constraint_referenced_ids="layout_custom_row_t_view_title,layout_custom_row_t_view_label" />
 
     <LinearLayout
         android:id="@+id/layout_custom_row_t_view_tips"

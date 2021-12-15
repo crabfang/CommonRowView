@@ -83,6 +83,7 @@ public abstract class AbstractRowView extends ConstraintLayout {
     protected abstract void initView(Context context);
     protected abstract int getTitleDefaultGravity();
     protected abstract int getLabelDefaultGravity();
+    protected void updateViewLabelWrap(boolean wrap){}
 
     protected void initAttr(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.LayoutRowViewNormal, defStyleAttr, 0);
@@ -161,6 +162,10 @@ public abstract class AbstractRowView extends ConstraintLayout {
             if(resId > 0) {
                 replaceLabel(resId);
             }
+        }
+        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_labelWrap)) {
+            boolean labelWrap = a.getBoolean(R.styleable.LayoutRowViewNormal_rv_labelWrap, false);
+            updateViewLabelWrap(labelWrap);
         }
 
         int optionPadding = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_optionPadding, DEFAULT_OPTION_PADDING);

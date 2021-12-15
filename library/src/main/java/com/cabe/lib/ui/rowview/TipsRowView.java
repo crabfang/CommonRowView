@@ -45,12 +45,12 @@ public class TipsRowView extends AbstractRowView {
     protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_tips, this);
         viewTitle = findViewById(R.id.layout_custom_row_t_view_title);
-        viewLabel = findViewById(R.id.layout_custom_row_t_view_hint);
+        viewLabel = findViewById(R.id.layout_custom_row_t_view_label);
 
         rvIcon = findViewById(R.id.layout_custom_row_t_icon);
         rvTitle = findViewById(R.id.layout_custom_row_t_head_title);
         rvFlag = findViewById(R.id.layout_custom_row_t_head_point);
-        rvLabel = findViewById(R.id.layout_custom_row_t_hint_tips);
+        rvLabel = findViewById(R.id.layout_custom_row_t_label_tips);
 
         viewTips = findViewById(R.id.layout_custom_row_t_view_tips);
         rvTips1 = findViewById(R.id.layout_custom_row_t_tips_info);

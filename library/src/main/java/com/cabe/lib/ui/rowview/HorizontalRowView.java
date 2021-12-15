@@ -27,13 +27,13 @@ public class HorizontalRowView extends AbstractRowView {
     protected void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.layout_custom_row_op_horizontal, this);
         viewTitle = findViewById(R.id.layout_custom_row_h_view_title);
-        viewLabel = findViewById(R.id.layout_custom_row_h_view_hint);
+        viewLabel = findViewById(R.id.layout_custom_row_h_view_label);
         viewOption = findViewById(R.id.layout_custom_row_h_view_option);
 
         rvIcon = findViewById(R.id.layout_custom_row_h_icon);
         rvTitle = findViewById(R.id.layout_custom_row_h_head_title);
         rvFlag = findViewById(R.id.layout_custom_row_h_head_point);
-        rvLabel = findViewById(R.id.layout_custom_row_h_hint_tips);
+        rvLabel = findViewById(R.id.layout_custom_row_h_label_tips);
         rvOption = findViewById(R.id.layout_custom_row_h_op_arrow);
     }
 
@@ -51,6 +51,14 @@ public class HorizontalRowView extends AbstractRowView {
     public void setLabelMargin(int margin) {
         ConstraintLayout.LayoutParams params = (LayoutParams) viewLabel.getLayoutParams();
         params.leftMargin = margin;
+        viewLabel.setLayoutParams(params);
+    }
+
+    @Override
+    protected void updateViewLabelWrap(boolean wrap) {
+        ConstraintLayout.LayoutParams params = (LayoutParams) viewLabel.getLayoutParams();
+        if(wrap) params.width = LayoutParams.WRAP_CONTENT;
+        else params.width = 0;
         viewLabel.setLayoutParams(params);
     }
 }

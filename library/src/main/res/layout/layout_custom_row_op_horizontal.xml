@@ -38,7 +38,7 @@
             android:ellipsize="end"
             android:textSize="16sp"
             android:textColor="#666666"
-            tools:text="string_app_name" />
+            tools:text="title_text" />
 
         <ImageView
             android:id="@+id/layout_custom_row_h_head_point"
@@ -51,7 +51,7 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/layout_custom_row_h_view_hint"
+        android:id="@+id/layout_custom_row_h_view_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -65,14 +65,14 @@
         app:layout_constraintBottom_toBottomOf="parent" >
 
         <TextView
-            android:id="@+id/layout_custom_row_h_hint_tips"
+            android:id="@+id/layout_custom_row_h_label_tips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:ellipsize="end"
             android:textSize="12sp"
             android:textColor="#999999"
-            tools:text="@string/app_name" />
+            tools:text="label_text" />
 
     </RelativeLayout>
 
