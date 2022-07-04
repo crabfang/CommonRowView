@@ -1,5 +1,9 @@
 change log
 ==========
+v2.0.10 2022-07-04
+-----------------
+1、修复高版本layout_constraintHorizontal_bias显示问题
+
 v2.0.9 2021-09-13
 -----------------
 1、新增rv_labelWrap属性
