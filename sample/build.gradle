@@ -5,7 +5,9 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
-
+    packagingOptions {
+        exclude 'META-INF/androidx.customview_customview.version'
+    }
     defaultConfig {
         minSdkVersion MIN_SDK_VERSION as int
         targetSdkVersion TARGET_SDK_VERSION as int
@@ -29,11 +31,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+    implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation project(':library')
 //    implementation 'com.cabe.lib.ui:RowView:1.3.0'
 }
