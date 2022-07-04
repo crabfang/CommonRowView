@@ -1,5 +1,9 @@
 change log
 ==========
+v2.1.0 2022-07-04
+-----------------
+1、ConstraintLayout迁移到androidX
+
 v2.0.10 2022-07-04
 -----------------
 1、修复高版本layout_constraintHorizontal_bias显示问题
