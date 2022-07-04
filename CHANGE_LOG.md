@@ -1,5 +1,9 @@
 change log
 ==========
+v2.1.0 2022-07-04
+-----------------
+1、ConstraintLayout依赖改成androidX
+
 v2.0.9 2021-09-13
 -----------------
 1、新增rv_labelWrap属性
