@@ -94,9 +94,6 @@ public abstract class AbstractRowView extends ConstraintLayout {
             setIcon(0);
         }
         setIconPadding((int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding, DEFAULT_ICON_PADDING));
-        if(a.hasValue(R.styleable.LayoutRowViewNormal_rv_titleDrawablePadding)) {
-            rvIcon.setVisibility(View.VISIBLE);
-        }
 
         int defaultWidth = LayoutParams.WRAP_CONTENT;
         int iconWidth = (int) a.getDimension(R.styleable.LayoutRowViewNormal_rv_titleDrawableWidth, defaultWidth);
