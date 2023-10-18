@@ -239,9 +239,9 @@ public abstract class AbstractRowView extends ConstraintLayout {
     public void setIcon(int iconRes) {
         if(rvIcon == null) return;
 
-        rvIcon.setVisibility(iconRes <= 0 ? View.GONE : View.VISIBLE);
-        if(iconRes > 0) {
+        if(iconRes != 0) {
             rvIcon.setImageResource(iconRes);
+            rvIcon.setVisibility(View.VISIBLE);
         }
     }
 
@@ -249,14 +249,14 @@ public abstract class AbstractRowView extends ConstraintLayout {
         if(rvIcon == null) return;
 
         rvIcon.setImageDrawable(icon);
-        rvIcon.setVisibility(icon == null ? View.GONE : View.VISIBLE);
+        if(icon != null) rvIcon.setVisibility(View.VISIBLE);
     }
 
     public void setIcon(Bitmap bmp) {
         if(rvIcon == null) return;
 
         rvIcon.setImageBitmap(bmp);
-        rvIcon.setVisibility(bmp == null ? View.GONE : View.VISIBLE);
+        if(bmp != null) rvIcon.setVisibility(View.VISIBLE);
     }
 
     public void setIconPadding(int padding) {
@@ -289,7 +289,7 @@ public abstract class AbstractRowView extends ConstraintLayout {
         if(rvLabel == null) return;
 
         rvLabel.setText(labelStr);
-        rvLabel.setVisibility(TextUtils.isEmpty(labelStr) ? View.GONE : View.VISIBLE);
+        if(!TextUtils.isEmpty(labelStr)) rvLabel.setVisibility(View.VISIBLE);
     }
 
     public void setTitleSize(int unit, float size) {
